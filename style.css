@@ -101,13 +101,24 @@ body {
 }
 
 #debug-output {
+  white-space: pre-wrap;
+  word-wrap: break-word;
   font-family: monospace;
-  padding: 20px;
-  margin: 20px auto;
-  max-width: 840px;
-  white-space: pre;
   color: #666;
-  font-size: 14px;
+}
+#debug-output * {
+  padding: 0;
+  margin: 0;
+}
+#debug-output h4 {
+  margin-top: 12px;
+}
+#debug-output ul {
+  padding-left: 16px;
+  padding-bottom: 8px;
+}
+#debug-output span.label {
+  color: #888;
 }
 
 .text-button {
