@@ -281,36 +281,26 @@ function generateAncestry(location) {
   const ancestries = locationData[location];
   if (!ancestries) return;
 
-  // Select random ancestry based on weights
-  const totalWeight = ancestries.reduce((sum, ancestry) => sum + ancestry.weight, 0);
-  let random = Math.random() * totalWeight;
-  
-  let selectedAncestry = ancestries[0];
-  for (const ancestry of ancestries) {
-    if (random < ancestry.weight) {
-      selectedAncestry = ancestry;
-      break;
-    }
-    random -= ancestry.weight;
-  }
+  // Use the getRandom function for consistent weighted selection
+  const selectedAncestry = getRandom(ancestries);
 
   // Find archetypes for this ancestry if they exist
-  let displayName = selectedAncestry.name;
+  let displayName = selectedAncestry;
   let debugInfo = {
-    rolledAncestry: selectedAncestry,
+    rolledAncestry: ancestries.find(a => a.name === selectedAncestry),
     availableArchetypes: null
   };
 
   if (archetypeData) {
     // Look for ancestry matching both name and source
     const ancestryInfo = archetypeData.ancestries.find(a => 
-      a.name === selectedAncestry.name && 
-      (!selectedAncestry.source || a.source === selectedAncestry.source)
+      a.name === selectedAncestry && 
+      (!debugInfo.rolledAncestry.source || a.source === debugInfo.rolledAncestry.source)
     );
     if (ancestryInfo?.archetypes?.length > 0) {
       const randomArchetype = ancestryInfo.archetypes[Math.floor(Math.random() * ancestryInfo.archetypes.length)];
       if (randomArchetype) { // Skip null archetypes
-        displayName = `${selectedAncestry.name} (${randomArchetype})`;
+        displayName = `${selectedAncestry} (${randomArchetype})`;
         debugInfo.availableArchetypes = ancestryInfo.archetypes.filter(a => a !== null);
         debugInfo.selectedArchetype = randomArchetype;
         debugInfo.source = ancestryInfo.source;
@@ -320,7 +310,7 @@ function generateAncestry(location) {
 
   // Add a/an prefix based on whether the name starts with a vowel
   const vowels = "aeiouAEIOU";
-  const prefix = vowels.includes(selectedAncestry.name[0]) ? "an " : "a ";
+  const prefix = vowels.includes(selectedAncestry[0]) ? "an " : "a ";
   document.getElementById('race').innerHTML = prefix + "<strong>" + displayName + "</strong>";
   
   // Generate all random details
@@ -342,7 +332,7 @@ function generateAncestry(location) {
     `------------------\n` +
     `Location: ${location}\n\n` +
     `Ancestry Data:\n` +
-    `  Name: ${selectedAncestry.name}\n` +
+    `  Name: ${selectedAncestry}\n` +
     `  Roll: ${selectedAncestry.roll}\n` +
     `  Weight: ${selectedAncestry.weight}\n` +
     `  Source: ${selectedAncestry.source || 'Unknown'}\n` +
