@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Ancestry Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-container">
+    <header class="row">
+      <div class="container" id="location-buttons"></div>
+    </header>
+
+    <div class="parchment-section">
+      <div class="content-container">
+        <p class="description"><em>You encounter <span id="race"></span>. They are <span id="height"></span>, <span id="build"></span>, and their skin is <span id="skintone"></span> colored. They <span id="feature1"></span> and <span id="feature2"></span></em>.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="container">
+        <div id="debug-output"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="container">
+        <a href="#" class="button" onclick="showAncestryList()">Available Ancestries</a>
+        <a href="#" class="text-button" onclick="hideAncestryList()">Hide data</a>
+      </div>
+    </div>
+    <div id="ancestry-list">
+      <div class="json-container">
+        <div class="json-column">
+          <div class="json-title">
+            Available ancestries JSON:
+            <a href="#" class="copy-link" onclick="copyToClipboard('ancestry-json')">(copy to clipboard)</a>
+          </div>
+          <pre id="ancestry-json"></pre>
+        </div>
+        <div class="json-column">
+          <div class="json-title">
+            Location template JSON:
+            <a href="#" class="copy-link" onclick="copyToClipboard('location-json')">(copy to clipboard)</a>
+          </div>
+          <pre id="location-json"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html> 

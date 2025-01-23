@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css?family=IM+Fell+DW+Pica&display=swap');
+
+body {
+  background: #f5ebd7;
+  font-family: "IM Fell DW Pica",Georgia,serif;
+  color: #301d0b;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+* { margin: 0; padding: 0; }
+
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top row - location buttons */
+.row {
+  width: 100%;
+  padding: 24px 0;
+  background: #f5ebd7;
+}
+
+.container {
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+/* Middle row - parchment description */
+.parchment-section {
+  height: 662px;
+  background: url(parchment.png) top center no-repeat;
+  background-position-y: 0;
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.description {
+  max-width: 840px;
+  font-size: 32px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* Bottom row - ancestry list */
+#ancestry-list {
+  width: 100%;
+  max-width: 1680px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: monospace;
+  white-space: pre;
+  display: none;
+  box-sizing: border-box;
+  color: #666;
+  font-size: 14px;
+}
+
+.button {
+  color: #fff;
+  font-size: 18px;
+  font-style: normal;
+  padding: 12px 24px;
+  background: #6F4E37;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+.button:hover {
+  background: #5C4033;
+  transition: 0.2s ease-out;
+}
+
+.json-container {
+  display: flex;
+  gap: 40px;
+}
+.json-column {
+  flex: 1;
+}
+.json-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: "IM Fell DW Pica",Georgia,serif;
+  font-size: 18px;
+  color: #301d0b;
+}
+
+#debug-output {
+  font-family: monospace;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 840px;
+  white-space: pre;
+  color: #666;
+  font-size: 14px;
+}
+
+.text-button {
+  font-size: 18px;
+  font-style: normal;
+  color: #301d0b;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 16px;
+}
+.text-button:hover {
+  text-decoration: underline;
+}
+.copy-link {
+  font-size: 14px;
+  color: #301d0b;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.copy-link:hover {
+  text-decoration: underline;
+}

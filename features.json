@@ -1,0 +1,342 @@
+{
+  "weight": [
+    {
+      "name": "of average build",
+      "weight": 30
+    },
+    {
+      "name": "chubby",
+      "weight": 4
+    },
+    {
+      "name": "heavyset",
+      "weight": 4
+    },
+    {
+      "name": "fat",
+      "weight": 2
+    },
+    {
+      "name": "thin",
+      "weight": 4
+    },
+    {
+      "name": "delicately framed",
+      "weight": 2
+    },
+    {
+      "name": "slight",
+      "weight": 2
+    },
+    {
+      "name": "athletic",
+      "weight": 10
+    },
+    {
+      "name": "muscular",
+      "weight": 3
+    },
+    {
+      "name": "jacked",
+      "weight": 3
+    },
+    {
+      "name": "wide-shouldered",
+      "weight": 3
+    }
+  ],
+  "height": [
+    {
+      "name": "tall",
+      "weight": 40
+    },
+    {
+      "name": "of average height",
+      "weight": 160
+    },
+    {
+      "name": "short",
+      "weight": 40
+    },
+    {
+      "name": "tiny",
+      "weight": 1
+    },
+    {
+      "name": "huge",
+      "weight": 1
+    }
+  ],
+  "skintone": [
+    {
+      "name": "very light",
+      "weight": 20
+    },
+    {
+      "name": "light",
+      "weight": 40
+    },
+    {
+      "name": "medium",
+      "weight": 160
+    },
+    {
+      "name": "dark",
+      "weight": 40
+    },
+    {
+      "name": "very dark",
+      "weight": 20
+    },
+    {
+      "name": "uniquely",
+      "weight": 5
+    }
+  ],
+  "features": [
+    {
+      "name": "are very attractive",
+      "weight": 20
+    },
+    {
+      "name": "are very ugly",
+      "weight": 20
+    },
+    {
+      "name": "have poor hygiene",
+      "weight": 20
+    },
+    {
+      "name": "wear rags",
+      "weight": 8
+    },
+    {
+      "name": "are overdressed",
+      "weight": 20
+    },
+    {
+      "name": "wear a hat",
+      "weight": 20
+    },
+    {
+      "name": "wear baggy clothes",
+      "weight": 20
+    },
+    {
+      "name": "wear tight-fitting clothes",
+      "weight": 20
+    },
+    {
+      "name": "wear ill-fitting clothes",
+      "weight": 20
+    },
+    {
+      "name": "wear made-to-measure clothes",
+      "weight": 20
+    },
+    {
+      "name": "wear revealing clothes",
+      "weight": 20
+    },
+    {
+      "name": "wear colorful clothes",
+      "weight": 20
+    },
+    {
+      "name": "wear ill-fitting clothes",
+      "weight": 20
+    },
+    {
+      "name": "are bald (or are wearing a scarf)",
+      "weight": 20
+    },
+    {
+      "name": "have short hair",
+      "weight": 20
+    },
+    {
+      "name": "have curly hair",
+      "weight": 20
+    },
+    {
+      "name": "have long hair",
+      "weight": 20
+    },
+    {
+      "name": "have grey hair",
+      "weight": 20
+    },
+    {
+      "name": "have messy hair",
+      "weight": 20
+    },
+    {
+      "name": "have an oblong head",
+      "weight": 20
+    },
+    {
+      "name": "have a round head",
+      "weight": 20
+    },
+    {
+      "name": "have a long head",
+      "weight": 20
+    },
+    {
+      "name": "have a square head",
+      "weight": 20
+    },
+    {
+      "name": "have a distinctive face",
+      "weight": 20
+    },
+    {
+      "name": "have have kind eyes",
+      "weight": 20
+    },
+    {
+      "name": "have shifty eyes",
+      "weight": 20
+    },
+    {
+      "name": "have weary eyes",
+      "weight": 20
+    },
+    {
+      "name": "have piercing eyes",
+      "weight": 20
+    },
+    {
+      "name": "have wide eyes",
+      "weight": 20
+    },
+    {
+      "name": "have wide nose",
+      "weight": 20
+    },
+    {
+      "name": "have a permanent smirk on their face",
+      "weight": 20
+    },
+    {
+      "name": "have a permanent smile on their face",
+      "weight": 20
+    },
+    {
+      "name": "have a permanent scowl on their face",
+      "weight": 20
+    },
+    {
+      "name": "have distinctive dimples",
+      "weight": 20
+    },
+    {
+      "name": "have deep frown lines",
+      "weight": 20
+    },
+    {
+      "name": "have a hooked nose",
+      "weight": 20
+    },
+    {
+      "name": "have a small nose",
+      "weight": 20
+    },
+    {
+      "name": "have a snub nose",
+      "weight": 20
+    },
+    {
+      "name": "have a long nose",
+      "weight": 20
+    },
+    {
+      "name": "have big ears",
+      "weight": 20
+    },
+    {
+      "name": "have freckles",
+      "weight": 20
+    },
+    {
+      "name": "have a mole or mark",
+      "weight": 20
+    },
+    {
+      "name": "have wrinkles",
+      "weight": 20
+    },
+    {
+      "name": "have piercings",
+      "weight": 20
+    },
+    {
+      "name": "have tattoos",
+      "weight": 20
+    },
+    {
+      "name": "are scarred",
+      "weight": 3
+    },
+    {
+      "name": "are badly scarred",
+      "weight": 1
+    },
+    {
+      "name": "have a unibrow",
+      "weight": 20
+    },
+    {
+      "name": "have crooked teeth",
+      "weight": 5
+    },
+    {
+      "name": "have a missing tooth",
+      "weight": 5
+    },
+    {
+      "name": "have a peg leg",
+      "weight": 2
+    },
+    {
+      "name": "walk with a limp",
+      "weight": 2
+    },
+    {
+      "name": "are in a wheelchair",
+      "weight": 1
+    },
+    {
+      "name": "are missing an arm",
+      "weight": 3
+    },
+    {
+      "name": "have a prosthetic hand",
+      "weight": 3
+    },
+    {
+      "name": "have poor posture",
+      "weight": 10
+    },
+    {
+      "name": "have undead properties",
+      "weight": 1
+    },
+    {
+      "name": "have elemental features",
+      "weight": 1
+    },
+    {
+      "name": "are corrupted from The Shattering",
+      "weight": 1
+    },
+    {
+      "name": "have ghostly properties",
+      "weight": 1
+    },
+    {
+      "name": "have ethereal properties",
+      "weight": 1
+    }
+  ]
+} 

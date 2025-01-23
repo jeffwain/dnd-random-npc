@@ -1,0 +1,232 @@
+{
+  "Random": [
+    {
+      "name": "Aasimar",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Alternate Human",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Dragonborn",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Dragonborn (Chromatic)",
+      "source": "FTD",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Dragonborn (Gem)",
+      "source": "FTD",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Dragonborn (Metallic)",
+      "source": "FTD",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Dwarf",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Elf",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Etherean",
+      "source": "TGS2",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Feathren",
+      "source": "TGS1",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Feyblood",
+      "source": "XLNEE",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Geleton",
+      "source": "TGS2",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Gnoll",
+      "source": "ExE",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Gnome",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Goblin (Dhakaani Golin'dar)",
+      "source": "ExE",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Goliath",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Grung",
+      "source": "OGA",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Half-Dryad",
+      "source": "TGS3",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Half-Giant",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Halfling",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Harengon (Rabbitfolk)",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Hobgoblin (Dhakaani Ghaal'dar)",
+      "source": "ExE",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Human",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Kcerpa (Squirrelfolk)",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Khenra",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Locathah",
+      "source": "LR",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Mrrshan",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Orc",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Oread",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Osphrani (Kangaroofolk)",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Owlin",
+      "source": "SCC",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Returned",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Ruun",
+      "source": "TGS3",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Talos",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Tiefling",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Tortle",
+      "source": "TTP",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Undine",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Ysoki (Ratfolk)",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    }
+  ]
+}

@@ -1,0 +1,320 @@
+{
+  "ancestries": [
+    {
+      "name": "Aasimar",
+      "source": "XPHB",
+      "archetypes": []
+    },
+    {
+      "name": "Alternate Human",
+      "source": "DMM",
+      "archetypes": [
+        "Arctic",
+        "Coastal",
+        "Deep",
+        "Desert",
+        "Mountain",
+        "Plains",
+        "Swamp"
+      ]
+    },
+    {
+      "name": "Dragonborn",
+      "source": "XPHB",
+      "archetypes": [
+        "Draconblood",
+        "Ravenite",
+        null
+      ]
+    },
+    {
+      "name": "Dragonborn (Chromatic)",
+      "source": "FTD",
+      "archetypes": []
+    },
+    {
+      "name": "Dragonborn (Gem)",
+      "source": "FTD",
+      "archetypes": []
+    },
+    {
+      "name": "Dragonborn (Metallic)",
+      "source": "FTD",
+      "archetypes": []
+    },
+    {
+      "name": "Dwarf",
+      "source": "DMM",
+      "archetypes": [
+        "Ashbearer",
+        "Duergar",
+        "Frostbeard",
+        "Hill",
+        "Lightbringer",
+        "Mark of Warding",
+        "Muckmolder",
+        "Ruinbound",
+        "Skyrider",
+        "Steppemaster",
+        "Stonebreaker",
+        "Vineguard",
+        "Wavetamer"
+      ]
+    },
+    {
+      "name": "Elf",
+      "source": "XPHB",
+      "archetypes": [
+        "Drow",
+        "Eladrin",
+        "High",
+        "Mark of Shadow",
+        "Pallid",
+        "Sea",
+        "Shadar-kai",
+        "Wood"
+      ]
+    },
+    {
+      "name": "Etherean",
+      "source": "TGS2",
+      "archetypes": []
+    },
+    {
+      "name": "Feathren",
+      "source": "TGS1",
+      "archetypes": []
+    },
+    {
+      "name": "Feyblood",
+      "source": "XLNEE",
+      "archetypes": [
+        "Dryashi (Earthborn)",
+        "Sylphi (Skyborn)"
+      ]
+    },
+    {
+      "name": "Geleton",
+      "source": "TGS2",
+      "archetypes": []
+    },
+    {
+      "name": "Gnoll",
+      "source": "ExE",
+      "archetypes": []
+    },
+    {
+      "name": "Gnome",
+      "source": "XPHB",
+      "archetypes": [
+        "Deep/Svirfneblin",
+        "Forest",
+        "Mark of Scribing",
+        "Rock"
+      ]
+    },
+    {
+      "name": "Goblin (Dhakaani Golin'dar)",
+      "source": "ExE",
+      "archetypes": [
+        "Artisan",
+        "Kesh'dar"
+      ]
+    },
+    {
+      "name": "Goliath",
+      "source": "XPHB",
+      "archetypes": []
+    },
+    {
+      "name": "Grung",
+      "source": "OGA",
+      "archetypes": []
+    },
+    {
+      "name": "Half-Dryad",
+      "source": "TGS3",
+      "archetypes": []
+    },
+    {
+      "name": "Half-Giant",
+      "source": "DMM",
+      "archetypes": [
+        "Frost"
+      ]
+    },
+    {
+      "name": "Halfling",
+      "source": "XPHB",
+      "archetypes": [
+        "Ghostwise",
+        "Lightfoot",
+        "Lotusden",
+        "Mark of Healing",
+        "Mark of Hospitality",
+        "Stout"
+      ]
+    },
+    {
+      "name": "Harengon (Rabbitfolk)",
+      "source": "DMM",
+      "archetypes": [
+        "Hare",
+        "Rabbit"
+      ]
+    },
+    {
+      "name": "Hobgoblin (Dhakaani Ghaal'dar)",
+      "source": "ExE",
+      "archetypes": [
+        "Guide",
+        "Soldier"
+      ]
+    },
+    {
+      "name": "Human",
+      "source": "XPHB",
+      "archetypes": [
+        "Keldon",
+        "Mark of Handling",
+        "Mark of Making",
+        "Mark of Passage",
+        "Mark of Sentinel",
+        "Variant",
+        "Variant; Mark of Finding"
+      ]
+    },
+    {
+      "name": "Kcerpa (Squirrelfolk)",
+      "source": "DMM",
+      "archetypes": []
+    },
+    {
+      "name": "Khenra",
+      "source": "DMM",
+      "archetypes": [
+        "Twin-Bonded",
+        "Twin-Severed"
+      ]
+    },
+    {
+      "name": "Locathah",
+      "source": "LR",
+      "archetypes": []
+    },
+    {
+      "name": "Mrrshan",
+      "source": "DMM",
+      "archetypes": [
+        "Panthera",
+        "Tabaxi"
+      ]
+    },
+    {
+      "name": "Orc",
+      "source": "XPHB",
+      "archetypes": []
+    },
+    {
+      "name": "Oread",
+      "source": "DMM",
+      "archetypes": [
+        "Florid",
+        "Mycelial",
+        "Old Growth",
+        "Rootwhisper",
+        "Sandsoul"
+      ]
+    },
+    {
+      "name": "Osphrani (Kangaroofolk)",
+      "source": "DMM",
+      "archetypes": []
+    },
+    {
+      "name": "Owlin",
+      "source": "SCC",
+      "archetypes": []
+    },
+    {
+      "name": "Returned",
+      "source": "DMM",
+      "archetypes": [
+        "Ghost",
+        "Harrower",
+        "Mourntouched",
+        "Plasmoid",
+        "Poltergeist",
+        "Wildmorph"
+      ]
+    },
+    {
+      "name": "Ruun",
+      "source": "TGS3",
+      "archetypes": [
+        "Rangol",
+        "Rooble",
+        "Ruglunk"
+      ]
+    },
+    {
+      "name": "Talos",
+      "source": "DMM",
+      "archetypes": [
+        "Duster",
+        "Goldenblood",
+        "Ironborn",
+        "Metal",
+        "Oozeborn",
+        "Orchid",
+        "Stoneborn"
+      ]
+    },
+    {
+      "name": "Tiefling",
+      "source": "XPHB",
+      "archetypes": [
+        "Asmodeus",
+        "Baalzebul",
+        "Dispater",
+        "Fierna",
+        "Glasya",
+        "Levistus",
+        "Mammon",
+        "Mephistopheles",
+        "Variant; Devil's Tongue",
+        "Variant; Hellfire",
+        "Variant; Infernal Legacy",
+        "Variant; Winged",
+        "Zariel"
+      ]
+    },
+    {
+      "name": "Tortle",
+      "source": "TTP",
+      "archetypes": []
+    },
+    {
+      "name": "Undine",
+      "source": "DMM",
+      "archetypes": [
+        "Crustacean",
+        "Elemental",
+        "Extreme",
+        "Fish",
+        "Iceborn",
+        "Poisonborn",
+        "Surface"
+      ]
+    },
+    {
+      "name": "Ysoki (Ratfolk)",
+      "source": "DMM",
+      "archetypes": [
+        "Rural",
+        "Scavenger",
+        "Spotter"
+      ]
+    }
+  ]
+}
