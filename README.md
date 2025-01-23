@@ -10,7 +10,7 @@ Place this project into a new `/generate` folder within the root directory of Th
 ## How it works
 Your Locations file is the main data to populate. Each top-level key is a location that can be used to roll random ancestries in the tool, and the value is an array of ancestries. Each ancestry object has a `name` and `weight`. The `weight` is a number that determines the likelihood of the ancestry being selected.
 
-You'll want to populate the locations file with the different sets of data you want to roll random ancestries from. I recommend setting this up in Google Sheets and using formulas to generate the JSON for you. For example, use `="{""name"": """&A2&""",""source"":"""",""roll"":"&B2&",""weight"": "&C2&"},"` to generate the JSON for each row, with the name in column A, the source in column B, the roll in column C, and the weight in column D.
+You'll want to populate the locations file with the different sets of data you want to roll random ancestries from. I recommend setting this up in Google Sheets and using formulas to generate the JSON for you. For example, use `="{""name"": """&A2&""",""source"":"""&B2&""",""roll"":"&c2&",""weight"": "&D2&"},"` to generate the JSON for each row, with the name in column A, the source in column B, the roll in column C, and the weight in column D.
 
 The Archetypes file is generated automatically based on the ancestries you have selected. It will include all available archetypes for each ancestry, and will be used to generate the ancestry display.
 
