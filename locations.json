@@ -7,10 +7,16 @@
       "weight": 1
     },
     {
-      "name": "Alternate Human",
+      "name": "Human",
       "source": "DMM",
       "roll": 1,
-      "weight": 1
+      "weight": 1,
+      "archetypes": [
+        { "name": "Plains", "weight": 10 },
+        { "name": "Coastal", "weight": 1 },
+        { "name": "Mountain", "weight": 1 },
+        { "name": "Desert", "weight": 2 }
+      ]
     },
     {
       "name": "Dragonborn",
@@ -134,9 +140,18 @@
     },
     {
       "name": "Human",
+      "source": "",
+      "roll": 1,
+      "weight": 10
+    },
+    {
+      "name": "Human",
       "source": "XPHB",
       "roll": 1,
-      "weight": 1
+      "weight": 10,
+      "archetypes": [
+        { "name": "Variant", "weight": 1 }
+      ]
     },
     {
       "name": "Kcerpa (Squirrelfolk)",
@@ -227,6 +242,176 @@
       "source": "DMM",
       "roll": 1,
       "weight": 1
+    }
+  ],
+  "Threshold": [
+    {
+      "name": "Human",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 70,
+      "archetypes": [
+        { "name": "Plains", "weight": 10 },
+        { "name": "Coastal", "weight": 1 },
+        { "name": "Mountain", "weight": 1 },
+        { "name": "Desert", "weight": 2 }
+      ]
+    },
+    {
+      "name": "Dwarf",
+      "source": "",
+      "roll": 2,
+      "weight": 20
+    },
+    {
+      "name": "Half-giant",
+      "source": "",
+      "roll": 3,
+      "weight": 4
+    },
+    {
+      "name": "Elf",
+      "source": "",
+      "roll": 4,
+      "weight": 2
+    },
+    {
+      "name": "Gnome",
+      "source": "",
+      "roll": 5,
+      "weight": 1
+    },
+    {
+      "name": "Halfling",
+      "source": "",
+      "roll": 6,
+      "weight": 3
+    },
+    {
+      "name": "Goblin",
+      "source": "",
+      "roll": 7,
+      "weight": 10
+    },
+    {
+      "name": "Hobgoblin",
+      "source": "",
+      "roll": 8,
+      "weight": 2
+    },
+    {
+      "name": "Orc",
+      "source": "",
+      "roll": 9,
+      "weight": 2
+    },
+    {
+      "name": "Ysoki (Ratfolk)",
+      "source": "",
+      "roll": 10,
+      "weight": 5
+    },
+    {
+      "name": "Anadi",
+      "source": "",
+      "roll": 11,
+      "weight": 1
+    },
+    {
+      "name": "Changeling",
+      "source": "",
+      "roll": 12,
+      "weight": 1
+    },
+    {
+      "name": "Medusa",
+      "source": "",
+      "roll": 13,
+      "weight": 1
+    },
+    {
+      "name": "Returned",
+      "source": "",
+      "roll": 14,
+      "weight": 1
+    },
+    {
+      "name": "Aven",
+      "source": "",
+      "roll": 15,
+      "weight": 1
+    },
+    {
+      "name": "Grung",
+      "source": "",
+      "roll": 16,
+      "weight": 1
+    },
+    {
+      "name": "Iruxi",
+      "source": "",
+      "roll": 17,
+      "weight": 1
+    },
+    {
+      "name": "Khenra",
+      "source": "",
+      "roll": 18,
+      "weight": 1
+    },
+    {
+      "name": "Mrrshan",
+      "source": "",
+      "roll": 19,
+      "weight": 1
+    },
+    {
+      "name": "Muul",
+      "source": "",
+      "roll": 20,
+      "weight": 1
+    },
+    {
+      "name": "Oread",
+      "source": "",
+      "roll": 21,
+      "weight": 1
+    },
+    {
+      "name": "Undine",
+      "source": "",
+      "roll": 22,
+      "weight": 0
+    },
+    {
+      "name": "Talos",
+      "source": "",
+      "roll": 23,
+      "weight": 1
+    },
+    {
+      "name": "Asir",
+      "source": "",
+      "roll": 24,
+      "weight": 1
+    },
+    {
+      "name": "Ifriti",
+      "source": "",
+      "roll": 25,
+      "weight": 3
+    },
+    {
+      "name": "Tiefling",
+      "source": "",
+      "roll": 26,
+      "weight": 6
+    },
+    {
+      "name": "Gnoll",
+      "source": "",
+      "roll": 27,
+      "weight": 2
     }
   ]
 }

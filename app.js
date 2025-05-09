@@ -10,8 +10,7 @@ let archetypeData = null; // Stores the direct mapping of ancestries to archetyp
  */
 async function loadFeatures() {
   try {
-    const response = await fetch('features.json');
-    featureData = await response.json();
+    featureData = await fetchJSON('features.json');
   } catch (error) {
     console.error('Error loading features:', error);
   }
@@ -24,11 +23,11 @@ async function loadFeatures() {
  */
 async function loadLocations() {
   try {
-    const response = await fetch('locations.json');
-    locationData = await response.json();
+    locationData = await fetchJSON('locations.json');
     displayLocationButtons();
     
-    // Get first location and generate an initial ancestry
+    await loadArchetypes();
+    
     const firstLocation = Object.keys(locationData)[0];
     if (firstLocation) {
       generateAncestry(firstLocation);
@@ -43,8 +42,7 @@ async function loadLocations() {
  */
 async function loadArchetypes() {
   try {
-    const response = await fetch('archetypes.json');
-    archetypeData = await response.json();
+    archetypeData = await fetchJSON('archetypes.json');
   } catch (error) {
     console.error('Error loading archetypes:', error);
   }
@@ -60,20 +58,18 @@ async function loadArchetypes() {
  */
 async function loadAllHomebrewAncestries() {
   try {
-    const ancestries = new Map(); // Store all ancestries
-    const archetypes = new Map(); // Store all archetypes with their parent ancestry reference
+    const ancestries = new Map();
+    const archetypes = new Map();
 
     console.log('Starting ancestry loading process...');
 
     // Load and parse the blocklist
-    const blocklistResponse = await fetch('../homebrew/content-blocklist.json');
-    const blocklistData = await blocklistResponse.json();
+    const blocklistData = await fetchJSON('../homebrew/content-blocklist.json');
     const blocklist = blocklistData.blocklist;
     console.log('Loaded blocklist:', blocklist);
 
     // Load and parse the homebrew index
-    const indexResponse = await fetch('../homebrew/index.json');
-    const indexData = await indexResponse.json();
+    const indexData = await fetchJSON('../homebrew/index.json');
     const homebrewFiles = indexData.toImport;
     console.log('Loaded homebrew files list:', homebrewFiles);
 
@@ -81,8 +77,7 @@ async function loadAllHomebrewAncestries() {
     for (const file of homebrewFiles) {
       try {
         console.log(`Processing homebrew file ${file}...`);
-        const fileResponse = await fetch(`../homebrew/${file}`);
-        const data = await fileResponse.json();
+        const data = await fetchJSON(`../homebrew/${file}`);
         await processHomebrewFile(data, ancestries, archetypes, blocklist);
       } catch (error) {
         console.error(`Error processing homebrew file ${file}:`, error);
@@ -91,11 +86,7 @@ async function loadAllHomebrewAncestries() {
 
     // Load and process the additional races file
     console.log('Attempting to load races.json...');
-    const racesResponse = await fetch('../data/races.json');
-    if (!racesResponse.ok) {
-      throw new Error(`HTTP error! status: ${racesResponse.status}`);
-    }
-    const racesData = await racesResponse.json();
+    const racesData = await fetchJSON('../data/races.json');
     console.log('Successfully loaded races.json, processing data...');
     await processHomebrewFile(racesData, ancestries, archetypes, blocklist);
     console.log('Finished processing races.json');
@@ -231,12 +222,12 @@ function getRandom(data) {
   for (const item of data) {
     total += item.weight;
     if (total >= threshold) {
-      return item.name;
+      return item;
     }
   }
 
   // If we get here, return the last item
-  return data[data.length - 1].name;
+  return data[data.length - 1];
 }
 
 /**
@@ -251,8 +242,8 @@ function getDistinctFeatures() {
   
   while (distinctions.length < 2) {
     const feature = getRandom(featureData.features);
-    if (distinctions.length === 0 || distinctions[0] !== feature) {
-      distinctions.push(feature);
+    if (distinctions.length === 0 || distinctions[0] !== feature.name) {
+      distinctions.push(feature.name);
     }
   }
 
@@ -281,18 +272,8 @@ function generateAncestry(location) {
   const ancestries = locationData[location];
   if (!ancestries) return;
 
-  // Select random ancestry based on weights
-  const totalWeight = ancestries.reduce((sum, ancestry) => sum + ancestry.weight, 0);
-  let random = Math.random() * totalWeight;
-  
-  let selectedAncestry = ancestries[0];
-  for (const ancestry of ancestries) {
-    if (random < ancestry.weight) {
-      selectedAncestry = ancestry;
-      break;
-    }
-    random -= ancestry.weight;
-  }
+  // Use the getRandom function for consistent weighted selection
+  const selectedAncestry = getRandom(ancestries);
 
   // Find archetypes for this ancestry if they exist
   let displayName = selectedAncestry.name;
@@ -302,31 +283,61 @@ function generateAncestry(location) {
   };
 
   if (archetypeData) {
-    // Look for ancestry matching both name and source
-    const ancestryInfo = archetypeData.ancestries.find(a => 
-      a.name === selectedAncestry.name && 
-      (!selectedAncestry.source || a.source === selectedAncestry.source)
-    );
-    if (ancestryInfo?.archetypes?.length > 0) {
-      const randomArchetype = ancestryInfo.archetypes[Math.floor(Math.random() * ancestryInfo.archetypes.length)];
-      if (randomArchetype) { // Skip null archetypes
-        displayName = `${selectedAncestry.name} (${randomArchetype})`;
-        debugInfo.availableArchetypes = ancestryInfo.archetypes.filter(a => a !== null);
-        debugInfo.selectedArchetype = randomArchetype;
-        debugInfo.source = ancestryInfo.source;
+    // If no source specified in locations.json, find all matching ancestries
+    const matchingAncestries = !selectedAncestry?.source ? 
+      archetypeData.ancestries.filter(a => a.name === selectedAncestry.name || a.name === selectedAncestry) :
+      [archetypeData.ancestries.find(a => 
+        (a.name === selectedAncestry.name || a.name === selectedAncestry) && 
+        a.source === selectedAncestry.source
+      )].filter(Boolean);
+
+    if (matchingAncestries.length > 0) {
+      // Combine all archetypes from matching ancestries
+      const combinedArchetypes = matchingAncestries.reduce((acc, ancestry) => {
+        if (ancestry.archetypes?.length > 0) {
+          acc.push(...ancestry.archetypes);
+        }
+        return acc;
+      }, []);
+
+      if (combinedArchetypes.length > 0) {
+        // Find all matching location ancestries and combine their archetypes
+        const locationArchetypes = !selectedAncestry?.source
+          ? combinedArchetypes
+          : selectedAncestry.archetypes || [];
+
+
+        // Use location-specific archetypes if defined, otherwise use combined archetypes
+        const archetypeList = locationArchetypes.length > 0 ? 
+          locationArchetypes :
+          combinedArchetypes.map(a => typeof a === 'string' ? { name: a, weight: 1 } : a);
+
+        // Select random archetype using weights
+        const randomArchetype = getRandom(archetypeList);
+        
+        if (randomArchetype) {
+          const archetypeName = typeof randomArchetype === 'string' ? randomArchetype : randomArchetype.name;
+          displayName = `${selectedAncestry.name} (${archetypeName})`;
+          debugInfo.availableArchetypes = archetypeList.map(a => typeof a === 'string' ? a : a.name);
+          debugInfo.selectedArchetype = archetypeName;
+          debugInfo.archetypeWeights = archetypeList.map(a => 
+            typeof a === 'string' ? `${a}: 1` : `${a.name}: ${a.weight}`
+          ).join(', ');
+          debugInfo.sources = matchingAncestries.map(a => a.source).join(', ');
+        }
       }
     }
   }
 
   // Add a/an prefix based on whether the name starts with a vowel
   const vowels = "aeiouAEIOU";
-  const prefix = vowels.includes(selectedAncestry.name[0]) ? "an " : "a ";
-  document.getElementById('race').innerHTML = prefix + "<strong>" + displayName + "</strong>";
+  const prefix = vowels.includes(displayName[0]) ? "an " : "a ";
+  document.getElementById('ancestry').innerHTML = prefix + "<strong>" + displayName + "</strong>";
   
   // Generate all random details
-  const heightResult = getRandom(featureData.height);
-  const buildResult = getRandom(featureData.weight);
-  const skintoneResult = getRandom(featureData.skintone);
+  const heightResult = getRandom(featureData.height).name;
+  const buildResult = getRandom(featureData.weight).name;
+  const skintoneResult = getRandom(featureData.skintone).name;
   const distinctFeatures = getDistinctFeatures();
 
   // Update display elements
@@ -336,25 +347,36 @@ function generateAncestry(location) {
   document.getElementById('feature1').textContent = distinctFeatures[0];
   document.getElementById('feature2').textContent = distinctFeatures[1];
 
-  // Update debug output with all details
-  document.getElementById('debug-output').textContent = 
-    `Rolled Details:\n` +
-    `------------------\n` +
-    `Location: ${location}\n\n` +
-    `Ancestry Data:\n` +
-    `  Name: ${selectedAncestry.name}\n` +
-    `  Roll: ${selectedAncestry.roll}\n` +
-    `  Weight: ${selectedAncestry.weight}\n` +
-    `  Source: ${selectedAncestry.source || 'Unknown'}\n` +
+  // Update debug output
+  document.getElementById('debug-output').innerHTML = 
+    `<h3>Rolled Details</h3>` +
+    `<h4>Ancestry Info</h4>` +
+    `<ul>` +
+    `<li><span class="label">Name:</span> ${selectedAncestry.name}</li>` +
+    `<li><span class="label">Weight:</span> ${selectedAncestry.weight || 1}</li>` +
+    `<li><span class="label">Source:</span> ${selectedAncestry.source || 'Any'}</li>` +
+    `</ul>` +
     (debugInfo.availableArchetypes ? 
-      `  Available Archetypes: ${debugInfo.availableArchetypes.join(', ')}\n` +
-      `  Selected Archetype: ${debugInfo.selectedArchetype}\n` : 
-      `  No archetypes available for this ancestry\n`) +
-    `\nRandomized Traits:\n` +
-    `  Height: ${heightResult}\n` +
-    `  Build: ${buildResult}\n` +
-    `  Skin tone: ${skintoneResult}\n` +
-    `  Features: \n    - ${distinctFeatures[0]}\n    - ${distinctFeatures[1]}`;
+      `<ul>` +
+      `<li><span class="label">Available Archetypes:</span> ${debugInfo.availableArchetypes.join(', ')}</li>` +
+      `<li><span class="label">Archetype Weights:</span> ${debugInfo.archetypeWeights}</li>` +
+      `<li><span class="label">Selected Archetype:</span> ${debugInfo.selectedArchetype}</li>` +
+      `<li><span class="label">Available Sources:</span> ${debugInfo.sources}</li>` +
+      `</ul>` : 
+      `<p>No archetypes available for this ancestry</p>`) +
+    `<h4>Randomized Traits</h4>` +
+    `<ul>` +
+    `<li><span class="label">Height:</span> ${heightResult}</li>` +
+    `<li><span class="label">Build:</span> ${buildResult}</li>` +
+    `<li><span class="label">Skin tone:</span> ${skintoneResult}</li>` +
+    `<li><span class="label">Features:</span>` +
+    `<ul>` +
+    `<li>${distinctFeatures[0]}</li>` +
+    `<li>${distinctFeatures[1]}</li>` +
+    `</ul>` +
+    `</li>` +
+    `</ul>` +
+    `<p>Location: ${location}</p>`;
 }
 
 /**
@@ -428,9 +450,15 @@ async function copyToClipboard(elementId) {
   }
 }
 
+// Add a timestamp or version parameter when fetching JSON files
+async function fetchJSON(url) {
+  const timestamp = new Date().getTime();
+  const response = await fetch(`${url}?v=${timestamp}`);
+  return response.json();
+}
+
 // Initialize the application by loading required data
 window.onload = async function() {
   await loadFeatures();
-  await loadLocations();
-  await loadArchetypes();
+  await loadLocations(); // This will now also load archetypes
 }; 

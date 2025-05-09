@@ -6,7 +6,7 @@
       "archetypes": []
     },
     {
-      "name": "Alternate Human",
+      "name": "Human",
       "source": "DMM",
       "archetypes": [
         "Arctic",
@@ -23,8 +23,7 @@
       "source": "XPHB",
       "archetypes": [
         "Draconblood",
-        "Ravenite",
-        null
+        "Ravenite"
       ]
     },
     {
@@ -72,7 +71,7 @@
         "Pallid",
         "Sea",
         "Shadar-kai",
-        "Wood"
+        {"name": "Wood", "weight": 50 }
       ]
     },
     {
@@ -232,11 +231,6 @@
       "archetypes": []
     },
     {
-      "name": "Owlin",
-      "source": "SCC",
-      "archetypes": []
-    },
-    {
       "name": "Returned",
       "source": "DMM",
       "archetypes": [
@@ -246,15 +240,6 @@
         "Plasmoid",
         "Poltergeist",
         "Wildmorph"
-      ]
-    },
-    {
-      "name": "Ruun",
-      "source": "TGS3",
-      "archetypes": [
-        "Rangol",
-        "Rooble",
-        "Ruglunk"
       ]
     },
     {

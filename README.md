@@ -4,8 +4,8 @@ Place this project into a new `/generate` folder within the root directory of Th
 2. Check the core `/data/races.json` file for all core ancestries.
 3. Exclude anything in the blocklist, named as `content-blocklist.json`.
 4. When you then click the **Available Ancestries** button it will generate a skeleton of two files:
-  - locations.json: A list of all locations you want to roll random ancestries from.
-  - archetypes.json: A list of all available ancestries available in your files.
+  - `locations.json`: A list of all locations you want to roll random ancestries from.
+  - `archetypes.json`: A list of all available ancestries available in your files.
 
 ## How it works
 Your Locations file is the main data to populate. Each top-level key is a location that can be used to roll random ancestries in the tool, and the value is an array of ancestries. Each ancestry object has a `name` and `weight`. The `weight` is a number that determines the likelihood of the ancestry being selected.
