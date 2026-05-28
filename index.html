@@ -23,8 +23,8 @@
     </div>
     <div class="row">
       <div class="container">
-        <a href="#" class="button" onclick="showAncestryList()">Available Ancestries</a>
-        <a href="#" class="text-button" onclick="hideAncestryList()">Hide data</a>
+        <a href="#" class="button" data-action="show-ancestry-list">Available Ancestries</a>
+        <a href="#" class="text-button" data-action="hide-ancestry-list">Hide data</a>
       </div>
     </div>
     <div id="ancestry-list">
@@ -32,14 +32,14 @@
         <div class="json-column">
           <div class="json-title">
             Available ancestries JSON:
-            <a href="#" class="copy-link" onclick="copyToClipboard('ancestry-json')">(copy to clipboard)</a>
+            <a href="#" class="copy-link" data-copy-target="ancestry-json">(copy to clipboard)</a>
           </div>
           <pre id="ancestry-json"></pre>
         </div>
         <div class="json-column">
           <div class="json-title">
             Location template JSON:
-            <a href="#" class="copy-link" onclick="copyToClipboard('location-json')">(copy to clipboard)</a>
+            <a href="#" class="copy-link" data-copy-target="location-json">(copy to clipboard)</a>
           </div>
           <pre id="location-json"></pre>
         </div>
@@ -47,6 +47,11 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script src="data/features.js"></script>
+  <script src="data/locations.js"></script>
+  <script src="data/archetypes.js"></script>
+  <script src="src/validate.js"></script>
+  <script src="src/random.js"></script>
+  <script src="src/app.js"></script>
 </body>
 </html> 

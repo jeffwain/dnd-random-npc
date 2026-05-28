@@ -1,0 +1,1261 @@
+{
+  "Random": [
+    {
+      "name": "Aasimar",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Human",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1,
+      "archetypes": [
+        { "name": "Plains", "weight": 10 },
+        { "name": "Coastal", "weight": 1 },
+        { "name": "Mountain", "weight": 1 },
+        { "name": "Desert", "weight": 2 }
+      ]
+    },
+    {
+      "name": "Dragonborn",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Dragonborn (Chromatic)",
+      "source": "FTD",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Dragonborn (Gem)",
+      "source": "FTD",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Dragonborn (Metallic)",
+      "source": "FTD",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Dwarf",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Elf",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Etherean",
+      "source": "TGS2",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Feathren",
+      "source": "TGS1",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Feyblood",
+      "source": "XLNEE",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Geleton",
+      "source": "TGS2",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Gnoll",
+      "source": "ExE",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Gnome",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Goblin (Dhakaani Golin'dar)",
+      "source": "ExE",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Goliath",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Grung",
+      "source": "OGA",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Half-Dryad",
+      "source": "TGS3",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Half-Giant",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Halfling",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Harengon (Rabbitfolk)",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Hobgoblin (Dhakaani Ghaal'dar)",
+      "source": "ExE",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Human",
+      "source": "",
+      "roll": 1,
+      "weight": 10
+    },
+    {
+      "name": "Human",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 10,
+      "archetypes": [
+        { "name": "Variant", "weight": 1 }
+      ]
+    },
+    {
+      "name": "Kcerpa (Squirrelfolk)",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Khenra",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Locathah",
+      "source": "LR",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Mrrshan",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Orc",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Oread",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Osphrani (Kangaroofolk)",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Owlin",
+      "source": "SCC",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Returned",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Ruun",
+      "source": "TGS3",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Talos",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Tiefling",
+      "source": "XPHB",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Tortle",
+      "source": "TTP",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Undine",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    },
+    {
+      "name": "Ysoki (Ratfolk)",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 1
+    }
+  ],
+  "Location Name": [
+    {
+      "name": "Asir (Windborn)",
+      "weight": 3,
+      "archetypes": [
+        {
+          "name": "Empath",
+          "weight": 1
+        },
+        {
+          "name": "Lightningborn",
+          "weight": 1
+        },
+        {
+          "name": "Psionic",
+          "weight": 1
+        },
+        {
+          "name": "Thundercaller",
+          "weight": 1
+        },
+        {
+          "name": "Vapor",
+          "weight": 1
+        },
+        {
+          "name": "Windborn",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Auran (Minotaur)",
+      "weight": 1,
+      "archetypes": [
+        {
+          "name": "Abyssal Brood",
+          "weight": 1
+        },
+        {
+          "name": "Labyrinth-Born",
+          "weight": 1
+        },
+        {
+          "name": "Seafarer",
+          "weight": 1
+        },
+        {
+          "name": "Wildhorn",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Aven (Birdfolk)",
+      "weight": 1,
+      "archetypes": [
+        {
+          "name": "Arctic",
+          "weight": 1
+        },
+        {
+          "name": "Flightless",
+          "weight": 1
+        },
+        {
+          "name": "Flying",
+          "weight": 1
+        },
+        {
+          "name": "Raptor",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Bearkin (Bear)",
+      "weight": 1
+    },
+    {
+      "name": "Bullywug",
+      "weight": 1
+    },
+    {
+      "name": "Changeling",
+      "weight": 1
+    },
+    {
+      "name": "Dhampir",
+      "weight": 1
+    },
+    {
+      "name": "Dragonborn",
+      "weight": 2,
+      "archetypes": [
+        {
+          "name": "Draconblood",
+          "weight": 1
+        },
+        {
+          "name": "Ravenite",
+          "weight": 1
+        },
+        {
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Dragonborn (Chromatic)",
+      "weight": 1
+    },
+    {
+      "name": "Dragonborn (Gem)",
+      "weight": 1
+    },
+    {
+      "name": "Dragonborn (Metallic)",
+      "weight": 1
+    },
+    {
+      "name": "Dwarf",
+      "weight": 7,
+      "archetypes": [
+        {
+          "name": "Ashbearer",
+          "weight": 1
+        },
+        {
+          "name": "Frostbeard",
+          "weight": 1
+        },
+        {
+          "name": "Lightbringer",
+          "weight": 1
+        },
+        {
+          "name": "Muckmolder",
+          "weight": 1
+        },
+        {
+          "name": "Skyrider",
+          "weight": 1
+        },
+        {
+          "name": "Steppemaster",
+          "weight": 1
+        },
+        {
+          "name": "Stonebreaker",
+          "weight": 1
+        },
+        {
+          "name": "Vineguard",
+          "weight": 1
+        },
+        {
+          "name": "Wavetamer",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Elf",
+      "weight": 4,
+      "archetypes": [
+        {
+          "name": "Drow",
+          "weight": 1
+        },
+        {
+          "name": "Eladrin",
+          "weight": 1
+        },
+        {
+          "name": "High",
+          "weight": 1
+        },
+        {
+          "name": "Mark of Shadow",
+          "weight": 1
+        },
+        {
+          "name": "Pallid",
+          "weight": 1
+        },
+        {
+          "name": "Sea",
+          "weight": 1
+        },
+        {
+          "name": "Shadar-kai",
+          "weight": 1
+        },
+        {
+          "name": "Wood",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Etherean",
+      "weight": 1
+    },
+    {
+      "name": "Feathren",
+      "weight": 1
+    },
+    {
+      "name": "Feyblood",
+      "weight": 2,
+      "archetypes": [
+        {
+          "name": "Dryashi (Earthborn)",
+          "weight": 1
+        },
+        {
+          "name": "Sylphi (Skyborn)",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Firbolg",
+      "weight": 1
+    },
+    {
+      "name": "Geleton",
+      "weight": 1
+    },
+    {
+      "name": "Gemstone Dragonborn",
+      "weight": 1
+    },
+    {
+      "name": "Geppettin",
+      "weight": 1
+    },
+    {
+      "name": "Giff (Hippo)",
+      "weight": 1
+    },
+    {
+      "name": "Gnoll",
+      "weight": 1
+    },
+    {
+      "name": "Gnome",
+      "weight": 5,
+      "archetypes": [
+        {
+          "name": "Deep",
+          "weight": 1
+        },
+        {
+          "name": "Deep Traveler",
+          "weight": 1
+        },
+        {
+          "name": "Deep/Svirfneblin",
+          "weight": 1
+        },
+        {
+          "name": "Discoverer",
+          "weight": 1
+        },
+        {
+          "name": "Forest",
+          "weight": 1
+        },
+        {
+          "name": "Inventor",
+          "weight": 1
+        },
+        {
+          "name": "Rock",
+          "weight": 1
+        },
+        {
+          "name": "Seafarer",
+          "weight": 1
+        },
+        {
+          "name": "Traveler",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Goblin",
+      "weight": 1
+    },
+    {
+      "name": "Goliath",
+      "weight": 1
+    },
+    {
+      "name": "Grimlock",
+      "weight": 1
+    },
+    {
+      "name": "Grung",
+      "weight": 1
+    },
+    {
+      "name": "Half-Dryad",
+      "weight": 1
+    },
+    {
+      "name": "Half-Giant",
+      "weight": 5,
+      "archetypes": [
+        {
+          "name": "Frost",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Halfling",
+      "weight": 4,
+      "archetypes": [
+        {
+          "name": "Ghostwise",
+          "weight": 2
+        },
+        {
+          "name": "Lightfoot",
+          "weight": 2
+        },
+        {
+          "name": "Lotusden",
+          "weight": 2
+        },
+        {
+          "name": "Stout",
+          "weight": 2
+        }
+      ]
+    },
+    {
+      "name": "Harengon (Rabbitfolk)",
+      "weight": 1,
+      "archetypes": [
+        {
+          "name": "Hare",
+          "weight": 1
+        },
+        {
+          "name": "Rabbit",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Hobgoblin",
+      "weight": 1
+    },
+    {
+      "name": "Hobgoblin (Dhakaani Ghaal'dar)",
+      "weight": 0,
+      "archetypes": [
+        {
+          "name": "Guide",
+          "weight": 1
+        },
+        {
+          "name": "Soldier",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Human",
+      "weight": 10,
+      "archetypes": [
+        {
+          "name": "Arctic",
+          "weight": 8
+        },
+        {
+          "name": "Coastal",
+          "weight": 25
+        },
+        {
+          "name": "Deep",
+          "weight": 4
+        },
+        {
+          "name": "Desert",
+          "weight": 12
+        },
+        {
+          "name": "Mountain",
+          "weight": 25
+        },
+        {
+          "name": "Plains",
+          "weight": 50
+        },
+        {
+          "name": "Swamp",
+          "weight": 12
+        }
+      ]
+    },
+    {
+      "name": "Ifriti (Flameborn)",
+      "weight": 3,
+      "archetypes": [
+        {
+          "name": "Ash",
+          "weight": 1
+        },
+        {
+          "name": "Fire",
+          "weight": 1
+        },
+        {
+          "name": "Magma",
+          "weight": 1
+        },
+        {
+          "name": "Steam",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Iruxi (Lizardfolk)",
+      "weight": 3,
+      "archetypes": [
+        {
+          "name": "Badlands",
+          "weight": 1
+        },
+        {
+          "name": "Desert",
+          "weight": 1
+        },
+        {
+          "name": "Forest",
+          "weight": 1
+        },
+        {
+          "name": "Jungle",
+          "weight": 1
+        },
+        {
+          "name": "Shelled",
+          "weight": 1
+        },
+        {
+          "name": "Swamp",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Kalashtar",
+      "weight": 1
+    },
+    {
+      "name": "Kashrishi (Rhino)",
+      "weight": 1,
+      "archetypes": [
+        {
+          "name": "Athamasi",
+          "weight": 1
+        },
+        {
+          "name": "Lethoci",
+          "weight": 1
+        },
+        {
+          "name": "Trogloshi",
+          "weight": 1
+        },
+        {
+          "name": "Xyloshi",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Kcerpa (Squirrelfolk)",
+      "weight": 1
+    },
+    {
+      "name": "Kenku",
+      "weight": 1
+    },
+    {
+      "name": "Khenra",
+      "weight": 1,
+      "archetypes": [
+        {
+          "name": "Twin Alive",
+          "weight": 1
+        },
+        {
+          "name": "Twin Dead",
+          "weight": 1
+        },
+        {
+          "name": "Twin-Bonded",
+          "weight": 1
+        },
+        {
+          "name": "Twin-Severed",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Kobold",
+      "weight": 1
+    },
+    {
+      "name": "Kuo-Toa",
+      "weight": 1
+    },
+    {
+      "name": "Lizardfolk",
+      "weight": 1
+    },
+    {
+      "name": "Locathah",
+      "weight": 1
+    },
+    {
+      "name": "Loxodon (Elephant)",
+      "weight": 1
+    },
+    {
+      "name": "Mandrake",
+      "weight": 1
+    },
+    {
+      "name": "Medusa",
+      "weight": 1
+    },
+    {
+      "name": "Merfolk",
+      "weight": 1
+    },
+    {
+      "name": "Mrrshan",
+      "weight": 2,
+      "archetypes": [
+        {
+          "name": "Panthera",
+          "weight": 1
+        },
+        {
+          "name": "Tabaxi",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Neurophaged",
+      "weight": 1
+    },
+    {
+      "name": "Orc",
+      "weight": 1
+    },
+    {
+      "name": "Oread",
+      "weight": 3,
+      "archetypes": [
+        {
+          "name": "Florid",
+          "weight": 1
+        },
+        {
+          "name": "Mycelial",
+          "weight": 1
+        },
+        {
+          "name": "Old Growth",
+          "weight": 1
+        },
+        {
+          "name": "Rootwhisper",
+          "weight": 1
+        },
+        {
+          "name": "Sandsoul",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Osphrani (Kangaroofolk)",
+      "weight": 1
+    },
+    {
+      "name": "Returned",
+      "weight": 2,
+      "archetypes": [
+        {
+          "name": "Ghost",
+          "weight": 1
+        },
+        {
+          "name": "Harrower",
+          "weight": 1
+        },
+        {
+          "name": "Mourntouched",
+          "weight": 1
+        },
+        {
+          "name": "Plasmoid",
+          "weight": 1
+        },
+        {
+          "name": "Poltergeist",
+          "weight": 1
+        },
+        {
+          "name": "Wildmorph",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Ruun",
+      "weight": 1,
+      "archetypes": [
+        {
+          "name": "Rangol",
+          "weight": 1
+        },
+        {
+          "name": "Rooble",
+          "weight": 1
+        },
+        {
+          "name": "Ruglunk",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Shadar-Kai",
+      "weight": 1
+    },
+    {
+      "name": "Shifter",
+      "weight": 1,
+      "archetypes": [
+        {
+          "name": "Beasthide",
+          "weight": 1
+        },
+        {
+          "name": "Longtooth",
+          "weight": 1
+        },
+        {
+          "name": "Swiftstride",
+          "weight": 1
+        },
+        {
+          "name": "Wildhunt",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Skeleton",
+      "weight": 1
+    },
+    {
+      "name": "Tabaxi",
+      "weight": 1
+    },
+    {
+      "name": "Talos",
+      "weight": 3,
+      "archetypes": [
+        {
+          "name": "Duster",
+          "weight": 1
+        },
+        {
+          "name": "Goldenblood",
+          "weight": 1
+        },
+        {
+          "name": "Ironborn",
+          "weight": 1
+        },
+        {
+          "name": "Metal",
+          "weight": 1
+        },
+        {
+          "name": "Oozeborn",
+          "weight": 1
+        },
+        {
+          "name": "Orchid",
+          "weight": 1
+        },
+        {
+          "name": "Stoneborn",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Tiefling",
+      "weight": 6,
+      "archetypes": [
+        {
+          "name": "Asmodeus",
+          "weight": 1
+        },
+        {
+          "name": "Baalzebul",
+          "weight": 1
+        },
+        {
+          "name": "Dispater",
+          "weight": 1
+        },
+        {
+          "name": "Fierna",
+          "weight": 1
+        },
+        {
+          "name": "Glasya",
+          "weight": 1
+        },
+        {
+          "name": "Levistus",
+          "weight": 1
+        },
+        {
+          "name": "Mammon",
+          "weight": 1
+        },
+        {
+          "name": "Mephistopheles",
+          "weight": 1
+        },
+        {
+          "name": "Variant; Devil's Tongue",
+          "weight": 1
+        },
+        {
+          "name": "Variant; Hellfire",
+          "weight": 1
+        },
+        {
+          "name": "Variant; Infernal Legacy",
+          "weight": 1
+        },
+        {
+          "name": "Variant; Winged",
+          "weight": 1
+        },
+        {
+          "name": "Zariel",
+          "weight": 1
+        },
+        {
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Troglodyte",
+      "weight": 1
+    },
+    {
+      "name": "Undine",
+      "weight": 3,
+      "archetypes": [
+        {
+          "name": "Crustacean",
+          "weight": 1
+        },
+        {
+          "name": "Deep",
+          "weight": 1
+        },
+        {
+          "name": "Elemental",
+          "weight": 1
+        },
+        {
+          "name": "Extreme",
+          "weight": 1
+        },
+        {
+          "name": "Fish",
+          "weight": 1
+        },
+        {
+          "name": "Iceborn",
+          "weight": 1
+        },
+        {
+          "name": "Poisonborn",
+          "weight": 1
+        },
+        {
+          "name": "Surface",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Warforged",
+      "weight": 1
+    },
+    {
+      "name": "Ysoki (Ratfolk)",
+      "weight": 2,
+      "archetypes": [
+        {
+          "name": "Rural",
+          "weight": 1
+        },
+        {
+          "name": "Scavenger",
+          "weight": 1
+        },
+        {
+          "name": "Spotter",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Zombie",
+      "weight": 1
+    }
+  ],
+  "Threshold": [
+    {
+      "name": "Human",
+      "source": "DMM",
+      "roll": 1,
+      "weight": 70,
+      "archetypes": [
+        { "name": "Plains", "weight": 10 },
+        { "name": "Coastal", "weight": 1 },
+        { "name": "Mountain", "weight": 1 },
+        { "name": "Desert", "weight": 2 }
+      ]
+    },
+    {
+      "name": "Dwarf",
+      "source": "",
+      "roll": 2,
+      "weight": 20
+    },
+    {
+      "name": "Half-giant",
+      "source": "",
+      "roll": 3,
+      "weight": 4
+    },
+    {
+      "name": "Elf",
+      "source": "",
+      "roll": 4,
+      "weight": 2
+    },
+    {
+      "name": "Gnome",
+      "source": "",
+      "roll": 5,
+      "weight": 1
+    },
+    {
+      "name": "Halfling",
+      "source": "",
+      "roll": 6,
+      "weight": 3
+    },
+    {
+      "name": "Goblin",
+      "source": "",
+      "roll": 7,
+      "weight": 10
+    },
+    {
+      "name": "Hobgoblin",
+      "source": "",
+      "roll": 8,
+      "weight": 2
+    },
+    {
+      "name": "Orc",
+      "source": "",
+      "roll": 9,
+      "weight": 2
+    },
+    {
+      "name": "Ysoki (Ratfolk)",
+      "source": "",
+      "roll": 10,
+      "weight": 5
+    },
+    {
+      "name": "Anadi",
+      "source": "",
+      "roll": 11,
+      "weight": 1
+    },
+    {
+      "name": "Changeling",
+      "source": "",
+      "roll": 12,
+      "weight": 1
+    },
+    {
+      "name": "Medusa",
+      "source": "",
+      "roll": 13,
+      "weight": 1
+    },
+    {
+      "name": "Returned",
+      "source": "",
+      "roll": 14,
+      "weight": 1
+    },
+    {
+      "name": "Aven",
+      "source": "",
+      "roll": 15,
+      "weight": 1
+    },
+    {
+      "name": "Grung",
+      "source": "",
+      "roll": 16,
+      "weight": 1
+    },
+    {
+      "name": "Iruxi",
+      "source": "",
+      "roll": 17,
+      "weight": 1
+    },
+    {
+      "name": "Khenra",
+      "source": "",
+      "roll": 18,
+      "weight": 1
+    },
+    {
+      "name": "Mrrshan",
+      "source": "",
+      "roll": 19,
+      "weight": 1
+    },
+    {
+      "name": "Muul",
+      "source": "",
+      "roll": 20,
+      "weight": 1
+    },
+    {
+      "name": "Oread",
+      "source": "",
+      "roll": 21,
+      "weight": 1
+    },
+    {
+      "name": "Undine",
+      "source": "",
+      "roll": 22,
+      "weight": 0
+    },
+    {
+      "name": "Talos",
+      "source": "",
+      "roll": 23,
+      "weight": 1
+    },
+    {
+      "name": "Asir",
+      "source": "",
+      "roll": 24,
+      "weight": 1
+    },
+    {
+      "name": "Ifriti",
+      "source": "",
+      "roll": 25,
+      "weight": 3
+    },
+    {
+      "name": "Tiefling",
+      "source": "",
+      "roll": 26,
+      "weight": 6
+    },
+    {
+      "name": "Gnoll",
+      "source": "",
+      "roll": 27,
+      "weight": 2
+    }
+  ]
+}
