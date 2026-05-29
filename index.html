@@ -2,50 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Random Ancestry Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NPC Generator</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="page-container">
-    <header class="row">
-      <div class="container" id="location-buttons"></div>
-    </header>
 
-    <div class="parchment-section">
-      <div class="content-container">
-        <p class="description"><em>You encounter <span id="ancestry"></span>. They are <span id="height"></span>, <span id="build"></span>, and their skin is <span id="skintone"></span> colored. They <span id="feature1"></span> and <span id="feature2"></span></em>.</p>
+  <nav class="location-strip" id="location-buttons" aria-label="Location"></nav>
+
+  <section class="parchment-section" aria-label="Generated NPC">
+    <div class="parchment-content">
+
+      <p class="description">You encounter <span id="ancestry"></span>. They are <span id="height"></span>, <span id="build"></span>, and their skin is <span id="skintone"></span> colored. They <span id="feature1"></span> and <span id="feature2"></span>.</p>
+
+      <div class="rule-ornament" role="separator" aria-hidden="true">
+        <svg width="280" height="16" viewBox="0 0 280 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="8" x2="106" y2="8" stroke="var(--rule)" stroke-width="0.75"/>
+          <line x1="174" y1="8" x2="280" y2="8" stroke="var(--rule)" stroke-width="0.75"/>
+          <circle cx="110" cy="8" r="1.8" fill="var(--rule)"/>
+          <circle cx="170" cy="8" r="1.8" fill="var(--rule)"/>
+          <polygon points="119,8 124,3.5 129,8 124,12.5" fill="var(--ink-faint)"/>
+          <polygon points="151,8 156,3.5 161,8 156,12.5" fill="var(--ink-faint)"/>
+          <polygon points="131,8 140,1 149,8 140,15" fill="var(--vermillion)"/>
+        </svg>
       </div>
-    </div>
-    <div class="row">
-      <div class="container">
-        <div id="debug-output"></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="container">
-        <a href="#" class="button" data-action="show-ancestry-list">Available Ancestries</a>
-        <a href="#" class="text-button" data-action="hide-ancestry-list">Hide data</a>
-      </div>
-    </div>
-    <div id="ancestry-list">
-      <div class="json-container">
-        <div class="json-column">
-          <div class="json-title">
-            Available ancestries JSON:
-            <a href="#" class="copy-link" data-copy-target="ancestry-json">(copy to clipboard)</a>
+
+      <div class="trait-roster" id="trait-roster">
+        <div class="trait-grid">
+          <div class="trait-item">
+            <span class="trait-label">Ancestry</span>
+            <span class="trait-value" id="trait-ancestry"></span>
           </div>
-          <pre id="ancestry-json"></pre>
-        </div>
-        <div class="json-column">
-          <div class="json-title">
-            Location template JSON:
-            <a href="#" class="copy-link" data-copy-target="location-json">(copy to clipboard)</a>
+          <div class="trait-item">
+            <span class="trait-label">Height</span>
+            <span class="trait-value" id="trait-height"></span>
           </div>
-          <pre id="location-json"></pre>
+          <div class="trait-item">
+            <span class="trait-label">Archetype</span>
+            <span class="trait-value" id="trait-archetype"></span>
+          </div>
+          <div class="trait-item">
+            <span class="trait-label">Build</span>
+            <span class="trait-value" id="trait-build"></span>
+          </div>
+          <div class="trait-item">
+            <span class="trait-label">Source</span>
+            <span class="trait-value" id="trait-source"></span>
+          </div>
+          <div class="trait-item">
+            <span class="trait-label">Skin Tone</span>
+            <span class="trait-value" id="trait-skin"></span>
+          </div>
+          <div class="trait-item trait-item--full">
+            <span class="trait-label">Features</span>
+            <span class="trait-value" id="trait-features"></span>
+          </div>
         </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="controls-row">
+    <a href="#" class="button" data-action="show-ancestry-list">Available Ancestries</a>
+    <a href="#" class="text-button" data-action="hide-ancestry-list">Hide</a>
+  </div>
+
+  <div id="ancestry-list">
+    <div class="json-container">
+      <div class="json-column">
+        <div class="json-title">
+          Available ancestries JSON
+          <a href="#" class="copy-link" data-copy-target="ancestry-json">(copy)</a>
+        </div>
+        <pre id="ancestry-json"></pre>
+      </div>
+      <div class="json-column">
+        <div class="json-title">
+          Location template JSON
+          <a href="#" class="copy-link" data-copy-target="location-json">(copy)</a>
+        </div>
+        <pre id="location-json"></pre>
       </div>
     </div>
   </div>
+
+  <div id="debug-output" aria-hidden="true"></div>
 
   <script src="data/features.js"></script>
   <script src="data/locations.js"></script>
@@ -54,4 +96,4 @@
   <script src="src/random.js"></script>
   <script src="src/app.js"></script>
 </body>
-</html> 
+</html>

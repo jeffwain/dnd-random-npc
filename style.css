@@ -1,144 +1,381 @@
-@import url('https://fonts.googleapis.com/css?family=IM+Fell+DW+Pica&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative&family=IM+Fell+DW+Pica:ital@0;1&display=swap');
 
-body {
-  background: #f5ebd7;
-  font-family: "IM Fell DW Pica",Georgia,serif;
-  color: #301d0b;
-  min-height: 100vh;
+:root {
+  --page:          oklch(90% 0.016 82);
+  --parchment:     oklch(87% 0.036 75);
+  --ink:           oklch(20% 0.040 48);
+  --ink-mid:       oklch(37% 0.032 48);
+  --ink-faint:     oklch(58% 0.018 58);
+  --rule:          oklch(73% 0.024 69);
+  --vermillion:    oklch(47% 0.172 28);
+  --vermillion-d:  oklch(41% 0.158 28);
+}
+
+*, *::before, *::after {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
-* { margin: 0; padding: 0; }
 
-.page-container {
+body {
+  background: var(--page);
+  font-family: "IM Fell DW Pica", Georgia, serif;
+  color: var(--ink);
   min-height: 100vh;
+}
+
+/* ── Location strip ───────────────────────────── */
+
+.location-strip {
   display: flex;
+  align-items: flex-start;
+  padding: 0 48px;
+  border-bottom: 1px solid var(--rule);
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: relative;
+}
+
+.location-strip::-webkit-scrollbar {
+  display: none;
+}
+
+/* Wavy dashed path injected as SVG by JS */
+.location-path-svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 0;
+  animation: path-reveal 0.9s cubic-bezier(0.25, 1, 0.5, 1) 0.1s both;
+}
+
+.location-tab {
+  font-family: "IM Fell DW Pica", Georgia, serif;
+  font-size: 17px;
+  letter-spacing: 0.015em;
+  color: var(--ink-faint);
+  text-decoration: none;
+  padding: 16px 22px 20px;
+  white-space: nowrap;
+  display: inline-flex;
   flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+  transition: color 0.2s ease-out;
+  animation: tab-arrive 0.45s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 
-/* Top row - location buttons */
-.row {
-  width: 100%;
-  padding: 24px 0;
-  background: #f5ebd7;
+/* Diamond waypoint marker */
+.location-tab::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border: 1.5px solid var(--rule);
+  transform: rotate(45deg);
+  transition:
+    transform 0.2s cubic-bezier(0.25, 1, 0.5, 1),
+    background 0.2s ease-out,
+    border-color 0.2s ease-out;
+  flex-shrink: 0;
 }
 
-.container {
-  max-width: 840px;
-  margin: 0 auto;
+.location-tab:hover {
+  color: var(--ink-mid);
 }
 
-/* Middle row - parchment description */
+.location-tab:not(.is-active):hover::before {
+  border-color: var(--ink-mid);
+  background: oklch(58% 0.018 58 / 0.25);
+  transform: rotate(45deg) scale(1.4);
+}
+
+.location-tab.is-active {
+  color: var(--vermillion);
+  font-style: italic;
+}
+
+.location-tab.is-active::before {
+  background: var(--vermillion);
+  border-color: var(--vermillion);
+  animation:
+    marker-stamp 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards,
+    marker-pulse 2.2s ease-out 0.35s infinite;
+}
+
+/* ── Parchment section ────────────────────────── */
+
 .parchment-section {
-  height: 662px;
-  background: url(parchment.png) top center no-repeat;
-  background-position-y: 0;
-  padding-top: 16px;
+  min-height: 680px;
+  background:
+    radial-gradient(ellipse 85% 65% at 50% 18%, oklch(93% 0.022 84 / 0.75) 0%, transparent 65%),
+    radial-gradient(ellipse 100% 80% at 50% 110%, oklch(72% 0.030 68 / 0.18) 0%, transparent 55%),
+    var(--parchment);
+  box-shadow: inset 0 0 120px oklch(67% 0.026 67 / 0.18);
+  position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding: 100px 60px 80px;
 }
 
-.content-container {
+.parchment-section::before {
+  content: '';
+  position: absolute;
+  inset: 20px 44px;
+  border: 1px solid oklch(70% 0.020 68 / 0.50);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.parchment-content {
+  max-width: 620px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  position: relative;
+  z-index: 1;
 }
+
+/* ── Parchment content transitions ────────────── */
+
+.parchment-content.content-exit {
+  animation: parchment-exit 0.1s ease-in forwards;
+}
+
+.parchment-content.content-enter {
+  animation: parchment-enter 0.5s cubic-bezier(0.25, 1, 0.5, 1) backwards;
+}
+
+/* ── Description ──────────────────────────────── */
 
 .description {
-  max-width: 840px;
-  font-size: 32px;
+  font-size: 30px;
+  line-height: 1.65;
   text-align: center;
-  padding: 0 20px;
+  font-style: italic;
+  color: var(--ink);
+  max-width: 56ch;
 }
 
-/* Bottom row - ancestry list */
-#ancestry-list {
+.description::first-letter {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 1.75em;
+  font-style: normal;
+  color: var(--vermillion);
+}
+
+/* ── Ornamental rule ──────────────────────────── */
+
+.rule-ornament {
+  margin: 52px 0 48px;
+  display: flex;
+  justify-content: center;
   width: 100%;
-  max-width: 1680px;
-  margin: 40px auto;
-  padding: 20px;
-  font-family: monospace;
-  white-space: pre;
-  display: none;
-  box-sizing: border-box;
-  color: #666;
-  font-size: 14px;
+}
+
+/* ── Trait roster ─────────────────────────────── */
+
+.trait-roster {
+  width: 100%;
+  max-width: 520px;
+}
+
+.trait-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 48px;
+}
+
+.trait-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.trait-item--full {
+  grid-column: 1 / -1;
+}
+
+.trait-label {
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  line-height: 1;
+}
+
+.trait-value {
+  font-family: "IM Fell DW Pica", Georgia, serif;
+  font-size: 19px;
+  font-style: italic;
+  color: var(--ink-mid);
+  line-height: 1.45;
+}
+
+/* ── Controls row ─────────────────────────────── */
+
+.controls-row {
+  padding: 28px 48px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  border-top: 1px solid var(--rule);
 }
 
 .button {
-  color: #fff;
-  font-size: 18px;
-  font-style: normal;
-  padding: 12px 24px;
-  background: #6F4E37;
+  font-family: "Cinzel", serif;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--page);
+  background: var(--vermillion);
   text-decoration: none;
   display: inline-block;
-  border-radius: 4px;
-  margin-right: 16px;
-  margin-bottom: 16px;
-  cursor: pointer;
+  padding: 10px 22px 9px;
+  border-radius: 1px;
+  transition: background 0.15s ease-out;
 }
+
 .button:hover {
-  background: #5C4033;
-  transition: 0.2s ease-out;
+  background: var(--vermillion-d);
+}
+
+.text-button {
+  font-family: "Cinzel", serif;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-decoration: none;
+  transition: color 0.15s ease-out;
+}
+
+.text-button:hover {
+  color: var(--ink-mid);
+}
+
+/* ── JSON appendix ────────────────────────────── */
+
+#ancestry-list {
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 40px 48px 56px;
+  display: none;
 }
 
 .json-container {
   display: flex;
-  gap: 40px;
+  gap: 48px;
 }
+
 .json-column {
   flex: 1;
+  min-width: 0;
 }
+
 .json-title {
-  font-weight: bold;
-  margin-bottom: 10px;
-  font-family: "IM Fell DW Pica",Georgia,serif;
-  font-size: 18px;
-  color: #301d0b;
+  font-family: "Cinzel", serif;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 14px;
 }
+
+.copy-link {
+  font-family: "IM Fell DW Pica", Georgia, serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-faint);
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: 6px;
+}
+
+.copy-link:hover {
+  color: var(--ink-mid);
+}
+
+pre#ancestry-json,
+pre#location-json {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  color: var(--ink-mid);
+  white-space: pre;
+  overflow-x: auto;
+  line-height: 1.55;
+}
+
+/* ── Error / debug ────────────────────────────── */
 
 #debug-output {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  font-family: monospace;
-  color: #666;
-}
-#debug-output * {
-  padding: 0;
-  margin: 0;
-}
-#debug-output h4 {
-  margin-top: 12px;
-}
-#debug-output ul {
-  padding-left: 16px;
-  padding-bottom: 8px;
-}
-#debug-output span.label {
-  color: #888;
+  display: none;
 }
 
-.text-button {
-  font-size: 18px;
-  font-style: normal;
-  color: #301d0b;
-  text-decoration: none;
-  cursor: pointer;
-  margin-left: 16px;
+#debug-output[data-has-errors] {
+  display: block;
+  padding: 24px 48px;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 13px;
+  color: var(--vermillion);
 }
-.text-button:hover {
-  text-decoration: underline;
+
+/* ── Animations ───────────────────────────────── */
+
+/* Wavy path reveals left to right (clip-path doesn't conflict with SVG gradient) */
+@keyframes path-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
 }
-.copy-link {
-  font-size: 14px;
-  color: #301d0b;
-  text-decoration: none;
-  cursor: pointer;
-  margin-left: 8px;
+
+/* Waypoint tabs arrive with stagger (delay set per-tab in JS) */
+@keyframes tab-arrive {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.copy-link:hover {
-  text-decoration: underline;
+
+/* Active waypoint stamps down: collapse → overshoot → settle */
+@keyframes marker-stamp {
+  0%   { transform: rotate(45deg) scale(0); }
+  65%  { transform: rotate(45deg) scale(1.45); }
+  100% { transform: rotate(45deg) scale(1); }
+}
+
+/* Active waypoint pulses like a beacon */
+@keyframes marker-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(47% 0.172 28 / 0.55); }
+  50%       { box-shadow: 0 0 0 5px oklch(47% 0.172 28 / 0); }
+}
+
+/* Content fades down (page turn out) */
+@keyframes parchment-exit {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(7px); }
+}
+
+/* New NPC unfurls upward (page turn in) */
+@keyframes parchment-enter {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Reduced motion ───────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .location-path-svg,
+  .location-tab,
+  .location-tab.is-active::before,
+  .parchment-content.content-exit,
+  .parchment-content.content-enter {
+    animation: none !important;
+  }
+  .location-tab::before {
+    transition: none;
+  }
 }
