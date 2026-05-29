@@ -58,9 +58,11 @@ body {
   text-decoration: none;
   padding: 16px 22px 20px;
   white-space: nowrap;
-  display: inline-flex;
+  display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   gap: 8px;
   position: relative;
   z-index: 1;
@@ -71,9 +73,9 @@ body {
 /* Diamond waypoint marker */
 .location-tab::before {
   content: '';
-  width: 7px;
-  height: 7px;
-  border: 1.5px solid var(--rule);
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--rule);
   transform: rotate(45deg);
   transition:
     transform 0.2s cubic-bezier(0.25, 1, 0.5, 1),
@@ -245,6 +247,12 @@ body {
   background: var(--vermillion-d);
 }
 
+.button--compact {
+  font-size: 10px;
+  padding: 7px 14px 6px;
+  letter-spacing: 0.12em;
+}
+
 .text-button {
   font-family: "Cinzel", serif;
   font-size: 12px;
@@ -284,22 +292,14 @@ body {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+
+.json-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 14px;
-}
-
-.copy-link {
-  font-family: "IM Fell DW Pica", Georgia, serif;
-  font-size: 13px;
-  font-style: italic;
-  color: var(--ink-faint);
-  text-decoration: none;
-  text-transform: none;
-  letter-spacing: 0;
-  margin-left: 6px;
-}
-
-.copy-link:hover {
-  color: var(--ink-mid);
 }
 
 pre#ancestry-json,

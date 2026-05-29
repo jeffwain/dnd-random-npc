@@ -15,41 +15,100 @@ function reportDataErrors(file, errors) {
   }
 }
 
-function drawLocationPath(container) {
-  const existing = container.querySelector('.location-path-svg');
-  if (existing) existing.remove();
+var locationPathObserver = null;
 
-  const width = container.scrollWidth;
-  const height = container.clientHeight || 56;
-  const centerY = 20;
-  const amplitude = 4;
-  const NS = 'http://www.w3.org/2000/svg';
+// Tab diamond center in strip-local coordinates
+function tabCenterX(tab, containerRect) {
+  const r = tab.getBoundingClientRect();
+  return r.left - containerRect.left + r.width / 2;
+}
 
-  // Wavy path: layered sines sampled at fixed intervals, smoothed via Catmull-Rom
-  const step = 44;
-  const pts = [];
-  const waveY = (x) =>
-    centerY
-    + Math.sin(x * 0.031) * amplitude
-    + Math.sin(x * 0.073) * amplitude * 0.45
-    + Math.sin(x * 0.018) * amplitude * 0.65;
+// Sample the wave with mandatory knots so every segment shares exact junction points
+function buildWavePoints(xMin, xMax, step, waveY, knotXs) {
+  const xs = new Set();
+  for (let x = xMin; x <= xMax; x += step) xs.add(x);
+  for (const x of knotXs) {
+    if (x >= xMin && x <= xMax) xs.add(x);
+  }
+  return Array.from(xs)
+    .sort((a, b) => a - b)
+    .map((x) => [x, waveY(x)]);
+}
 
-  for (let x = 0; x <= width; x += step) pts.push([x, waveY(x)]);
-  if (pts[pts.length - 1][0] < width) pts.push([width, waveY(width)]);
+function indexAtX(pts, x) {
+  for (let i = 0; i < pts.length; i++) {
+    if (Math.abs(pts[i][0] - x) < 0.05) return i;
+  }
+  return -1;
+}
 
-  // Catmull-Rom → cubic bezier
-  let d = `M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
-  for (let i = 1; i < pts.length; i++) {
-    const p0 = pts[Math.max(i - 2, 0)];
-    const p1 = pts[i - 1];
-    const p2 = pts[i];
-    const p3 = pts[Math.min(i + 1, pts.length - 1)];
+// Catmull-Rom slice of the global point list — smooth at shared knots between segments
+function pathDFromPoints(pts, iStart, iEnd) {
+  let d = `M ${pts[iStart][0].toFixed(1)} ${pts[iStart][1].toFixed(1)}`;
+  for (let j = iStart + 1; j <= iEnd; j++) {
+    const p0 = pts[Math.max(j - 2, 0)];
+    const p1 = pts[j - 1];
+    const p2 = pts[j];
+    const p3 = pts[Math.min(j + 1, pts.length - 1)];
     const cp1x = p1[0] + (p2[0] - p0[0]) / 6;
     const cp1y = p1[1] + (p2[1] - p0[1]) / 6;
     const cp2x = p2[0] - (p3[0] - p1[0]) / 6;
     const cp2y = p2[1] - (p3[1] - p1[1]) / 6;
     d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)} ${cp2x.toFixed(1)} ${cp2y.toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
   }
+  return d;
+}
+
+function appendSegmentGradient(defs, gradId, x1, x2, ruleColor, NS) {
+  const grad = document.createElementNS(NS, 'linearGradient');
+  grad.setAttribute('id', gradId);
+  grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+  grad.setAttribute('x1', String(x1));
+  grad.setAttribute('y1', '0');
+  grad.setAttribute('x2', String(x2));
+  grad.setAttribute('y2', '0');
+  [
+    [0, 0],
+    [0.08, 1],
+    [0.92, 1],
+    [1, 0],
+  ].forEach(([offset, opacity]) => {
+    const stop = document.createElementNS(NS, 'stop');
+    stop.setAttribute('offset', `${offset * 100}%`);
+    stop.setAttribute('stop-color', ruleColor);
+    stop.setAttribute('stop-opacity', String(opacity));
+    grad.appendChild(stop);
+  });
+  defs.appendChild(grad);
+}
+
+function drawLocationPath(container) {
+  const existing = container.querySelector('.location-path-svg');
+  if (existing) existing.remove();
+
+  const tabs = Array.from(container.querySelectorAll('.location-tab'));
+  if (tabs.length < 2) return;
+
+  const containerRect = container.getBoundingClientRect();
+  const width = container.scrollWidth;
+  const height = container.clientHeight || 56;
+  const NS = 'http://www.w3.org/2000/svg';
+
+  // centerY matches the diamond ::before center: padding-top(16) + half-diamond(3.5) ≈ 20
+  const centerY = 20;
+  const amplitude = 4;
+  const step = 44;
+
+  const waveY = (x) =>
+    centerY
+    + Math.sin(x * 0.031) * amplitude
+    + Math.sin(x * 0.073) * amplitude * 0.45
+    + Math.sin(x * 0.018) * amplitude * 0.65;
+
+  const tabXs = tabs.map((tab) => tabCenterX(tab, containerRect));
+  // Breakpoints: strip edges plus each location diamond center
+  const knotXs = [0, ...tabXs, width];
+  const globalPts = buildWavePoints(0, width, step, waveY, knotXs);
 
   const ruleColor = getComputedStyle(document.documentElement).getPropertyValue('--rule').trim();
 
@@ -61,40 +120,37 @@ function drawLocationPath(container) {
   svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
 
   const defs = document.createElementNS(NS, 'defs');
-  const grad = document.createElementNS(NS, 'linearGradient');
-  grad.setAttribute('id', 'path-fade-grad');
-  grad.setAttribute('gradientUnits', 'userSpaceOnUse');
-  grad.setAttribute('x1', '0');
-  grad.setAttribute('y1', '0');
-  grad.setAttribute('x2', String(width));
-  grad.setAttribute('y2', '0');
-  [
-    [0,    0  ],
-    [0.10, 0.5],
-    [0.18, 1  ],
-    [0.82, 1  ],
-    [0.90, 0.5],
-    [1,    0  ],
-  ].forEach(([offset, opacity]) => {
-    const stop = document.createElementNS(NS, 'stop');
-    stop.setAttribute('offset', `${offset * 100}%`);
-    stop.setAttribute('stop-color', ruleColor);
-    stop.setAttribute('stop-opacity', String(opacity));
-    grad.appendChild(stop);
-  });
-  defs.appendChild(grad);
-  svg.appendChild(defs);
 
-  const pathEl = document.createElementNS(NS, 'path');
-  pathEl.setAttribute('d', d);
-  pathEl.setAttribute('stroke', 'url(#path-fade-grad)');
-  pathEl.setAttribute('stroke-width', '1');
-  pathEl.setAttribute('stroke-dasharray', '3 8');
-  pathEl.setAttribute('stroke-linecap', 'round');
-  pathEl.setAttribute('fill', 'none');
-  svg.appendChild(pathEl);
+  for (let i = 0; i < knotXs.length - 1; i++) {
+    const x1 = knotXs[i];
+    const x2 = knotXs[i + 1];
+    if (x2 - x1 <= 0) continue;
 
+    const iStart = indexAtX(globalPts, x1);
+    const iEnd = indexAtX(globalPts, x2);
+    if (iStart < 0 || iEnd < 0 || iEnd <= iStart) continue;
+
+    const gradId = `seg-grad-${i}`;
+    appendSegmentGradient(defs, gradId, x1, x2, ruleColor, NS);
+
+    const pathEl = document.createElementNS(NS, 'path');
+    pathEl.setAttribute('d', pathDFromPoints(globalPts, iStart, iEnd));
+    pathEl.setAttribute('stroke', `url(#${gradId})`);
+    pathEl.setAttribute('stroke-width', '1');
+    pathEl.setAttribute('stroke-dasharray', '3 8');
+    pathEl.setAttribute('stroke-linecap', 'round');
+    pathEl.setAttribute('fill', 'none');
+    svg.appendChild(pathEl);
+  }
+
+  svg.insertBefore(defs, svg.firstChild);
   container.appendChild(svg);
+}
+
+function observeLocationPath(container) {
+  if (locationPathObserver) locationPathObserver.disconnect();
+  locationPathObserver = new ResizeObserver(() => drawLocationPath(container));
+  locationPathObserver.observe(container);
 }
 
 function displayLocationButtons() {
@@ -115,13 +171,18 @@ function displayLocationButtons() {
     container.appendChild(tab);
     index++;
   }
-  requestAnimationFrame(() => drawLocationPath(container));
+  requestAnimationFrame(() => {
+    drawLocationPath(container);
+    observeLocationPath(container);
+  });
 }
 
 function setActiveTab(location) {
   document.querySelectorAll(".location-tab").forEach((tab) => {
     tab.classList.toggle("is-active", tab.dataset.location === location);
   });
+  const strip = document.getElementById("location-buttons");
+  if (strip) requestAnimationFrame(() => drawLocationPath(strip));
 }
 
 function setTraitRoster({ ancestryName, archetypeName, source, height, build, skin, features }) {
@@ -261,6 +322,13 @@ function showAncestryList() {
   };
 
   document.getElementById("location-json").textContent = JSON.stringify(locationTemplate, null, 2);
+
+  document.querySelectorAll("[data-download-kind]").forEach((btn) => {
+    const label = dataFileUsesJsModule(btn.dataset.downloadKind) ? "Download JS" : "Download JSON";
+    btn.textContent = label;
+    btn.dataset.originalLabel = label;
+  });
+
   document.getElementById("ancestry-list").style.display = "block";
 }
 
@@ -268,18 +336,102 @@ function hideAncestryList() {
   document.getElementById("ancestry-list").style.display = "none";
 }
 
+// Mirrors script tags in index.html — used for save filename and module wrapper.
+var DATA_FILE_CONFIG = {
+  archetypes: { scriptMatch: "archetypes", varName: "archetypesData", defaultSrc: "data/archetypes.js" },
+  locations: { scriptMatch: "locations", varName: "locationsData", defaultSrc: "data/locations.js" },
+};
+
+function dataFileUsesJsModule(kind) {
+  const cfg = DATA_FILE_CONFIG[kind];
+  const script = document.querySelector('script[src*="' + cfg.scriptMatch + '"]');
+  const src = script ? script.getAttribute("src") : cfg.defaultSrc;
+  return src.endsWith(".js");
+}
+
+function getDownloadSpec(kind) {
+  const cfg = DATA_FILE_CONFIG[kind];
+  const usesJs = dataFileUsesJsModule(kind);
+  const basename = cfg.scriptMatch === "archetypes" ? "archetypes" : "locations";
+  return {
+    filename: usesJs ? basename + ".js" : basename + ".json",
+    mime: usesJs ? "text/javascript" : "application/json",
+    varName: cfg.varName,
+    usesJs: usesJs,
+  };
+}
+
+function formatDownloadContent(elementId, kind) {
+  const text = document.getElementById(elementId).textContent;
+  const spec = getDownloadSpec(kind);
+  if (spec.usesJs) {
+    return "var " + spec.varName + " = " + text + ";\n";
+  }
+  return text;
+}
+
+function flashButtonLabel(btn, label, ms = 1000) {
+  if (!btn.dataset.originalLabel) btn.dataset.originalLabel = btn.textContent;
+  btn.textContent = label;
+  setTimeout(() => {
+    btn.textContent = btn.dataset.originalLabel;
+  }, ms);
+}
+
 async function copyToClipboard(elementId, evt) {
   const element = document.getElementById(elementId);
+  const btn = evt.currentTarget;
   try {
     await navigator.clipboard.writeText(element.textContent);
-    const link = evt.currentTarget;
-    const originalText = link.textContent;
-    link.textContent = "(copied!)";
-    setTimeout(() => {
-      link.textContent = originalText;
-    }, 1000);
+    flashButtonLabel(btn, "Copied");
   } catch (err) {
     console.error("Failed to copy text: ", err);
+    flashButtonLabel(btn, "Failed");
+  }
+}
+
+async function saveFileWithPicker(filename, contents, mimeType) {
+  if (!window.showSaveFilePicker) return false;
+  const ext = filename.slice(filename.lastIndexOf("."));
+  try {
+    const handle = await window.showSaveFilePicker({
+      suggestedName: filename,
+      types: [{ description: "Data file", accept: { [mimeType]: [ext] } }],
+    });
+    const writable = await handle.createWritable();
+    await writable.write(contents);
+    await writable.close();
+    return true;
+  } catch (err) {
+    if (err.name === "AbortError") return null;
+    throw err;
+  }
+}
+
+function downloadViaAnchor(filename, contents, mimeType) {
+  const blob = new Blob([contents], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = filename;
+  anchor.click();
+  URL.revokeObjectURL(url);
+  return true;
+}
+
+async function downloadDataFile(btn, evt) {
+  evt.preventDefault();
+  const elementId = btn.dataset.download;
+  const kind = btn.dataset.downloadKind;
+  const spec = getDownloadSpec(kind);
+  const contents = formatDownloadContent(elementId, kind);
+  try {
+    let saved = await saveFileWithPicker(spec.filename, contents, spec.mime);
+    if (saved === false) saved = downloadViaAnchor(spec.filename, contents, spec.mime);
+    if (saved) flashButtonLabel(btn, "Saved");
+  } catch (err) {
+    console.error("Failed to save file: ", err);
+    flashButtonLabel(btn, "Failed");
   }
 }
 
@@ -292,11 +444,14 @@ function bindUiHandlers() {
     evt.preventDefault();
     hideAncestryList();
   });
-  document.querySelectorAll("[data-copy-target]").forEach((link) => {
-    link.addEventListener("click", (evt) => {
+  document.querySelectorAll("[data-copy-target]").forEach((btn) => {
+    btn.addEventListener("click", (evt) => {
       evt.preventDefault();
-      copyToClipboard(link.dataset.copyTarget, evt);
+      copyToClipboard(btn.dataset.copyTarget, evt);
     });
+  });
+  document.querySelectorAll("[data-download]").forEach((btn) => {
+    btn.addEventListener("click", (evt) => downloadDataFile(btn, evt));
   });
 }
 
