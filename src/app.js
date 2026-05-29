@@ -1,6 +1,7 @@
 var locationData = null;
 var featureData = null;
 var archetypeData = null;
+var ancestrySelections = null;
 
 function reportDataErrors(file, errors) {
   if (errors.length === 0) return;
@@ -299,32 +300,185 @@ function generateAncestry(location) {
   }
 }
 
+// ── Ancestry selection register ────────────────────────
+
+function ancestryKey(ancestry) {
+  return ancestry.name + "\x00" + (ancestry.source || "");
+}
+
+function initSelections() {
+  ancestrySelections = new Map();
+  archetypeData.ancestries.forEach(function (ancestry) {
+    ancestrySelections.set(ancestryKey(ancestry), {
+      selected: true,
+      archetypes: new Set(ancestry.archetypes),
+    });
+  });
+}
+
+function getSelectedData() {
+  var result = archetypeData.ancestries
+    .filter(function (a) {
+      return ancestrySelections.get(ancestryKey(a)).selected;
+    })
+    .map(function (a) {
+      var sel = ancestrySelections.get(ancestryKey(a));
+      return {
+        name: a.name,
+        source: a.source,
+        archetypes: a.archetypes.filter(function (arch) {
+          return sel.archetypes.has(arch);
+        }),
+      };
+    });
+  result.sort(function (a, b) {
+    var n = a.name.localeCompare(b.name);
+    return n !== 0 ? n : (a.source || "").localeCompare(b.source || "");
+  });
+  return { ancestries: result };
+}
+
+function updateRegisterCount() {
+  var total = archetypeData.ancestries.length;
+  var selected = 0;
+  ancestrySelections.forEach(function (sel) {
+    if (sel.selected) selected++;
+  });
+  var el = document.getElementById("register-count");
+  if (el) el.textContent = selected + " of " + total + " selected";
+}
+
+function updateJsonPreview() {
+  var el = document.getElementById("ancestry-json");
+  if (!el) return;
+  el.textContent = JSON.stringify(getSelectedData(), null, 2);
+}
+
+function buildRegisterEntry(ancestry) {
+  var key = ancestryKey(ancestry);
+  var sel = ancestrySelections.get(key);
+
+  var entry = document.createElement("div");
+  entry.className = "register-entry";
+  entry.dataset.ancestryKey = key;
+  entry.dataset.selected = sel.selected ? "true" : "false";
+  entry.setAttribute("role", "listitem");
+
+  var row = document.createElement("div");
+  row.className = "register-row";
+
+  var diamond = document.createElement("button");
+  diamond.type = "button";
+  diamond.className = "register-diamond-btn";
+  diamond.setAttribute("aria-label", (sel.selected ? "Deselect " : "Select ") + ancestry.name);
+  diamond.setAttribute("aria-pressed", sel.selected ? "true" : "false");
+  diamond.addEventListener("click", function () {
+    var s = ancestrySelections.get(key);
+    s.selected = !s.selected;
+    entry.dataset.selected = s.selected ? "true" : "false";
+    diamond.setAttribute("aria-pressed", s.selected ? "true" : "false");
+    diamond.setAttribute("aria-label", (s.selected ? "Deselect " : "Select ") + ancestry.name);
+    updateRegisterCount();
+    updateJsonPreview();
+  });
+
+  var name = document.createElement("span");
+  name.className = "register-name";
+  name.textContent = ancestry.name;
+
+  var source = document.createElement("span");
+  source.className = "register-source";
+  source.textContent = ancestry.source || "";
+
+  row.appendChild(diamond);
+  row.appendChild(name);
+  row.appendChild(source);
+  entry.appendChild(row);
+
+  if (ancestry.archetypes && ancestry.archetypes.length > 0) {
+    var sortedArchetypes = ancestry.archetypes.slice().sort();
+    var group = document.createElement("div");
+    group.className = "register-archetypes";
+
+    sortedArchetypes.forEach(function (archetype) {
+      var isSelected = sel.archetypes.has(archetype);
+
+      var aRow = document.createElement("div");
+      aRow.className = "register-archetype";
+      aRow.dataset.selected = isSelected ? "true" : "false";
+
+      var aDiamond = document.createElement("button");
+      aDiamond.type = "button";
+      aDiamond.className = "register-diamond-btn register-diamond-btn--sub";
+      aDiamond.setAttribute("aria-label", (isSelected ? "Deselect " : "Select ") + archetype);
+      aDiamond.setAttribute("aria-pressed", isSelected ? "true" : "false");
+      aDiamond.addEventListener("click", function () {
+        var s = ancestrySelections.get(key);
+        if (s.archetypes.has(archetype)) {
+          s.archetypes.delete(archetype);
+        } else {
+          s.archetypes.add(archetype);
+        }
+        var nowSelected = s.archetypes.has(archetype);
+        aRow.dataset.selected = nowSelected ? "true" : "false";
+        aDiamond.setAttribute("aria-pressed", nowSelected ? "true" : "false");
+        aDiamond.setAttribute("aria-label", (nowSelected ? "Deselect " : "Select ") + archetype);
+        updateJsonPreview();
+      });
+
+      var aName = document.createElement("span");
+      aName.className = "register-name register-name--sub";
+      aName.textContent = archetype;
+
+      aRow.appendChild(aDiamond);
+      aRow.appendChild(aName);
+      group.appendChild(aRow);
+    });
+
+    entry.appendChild(group);
+  }
+
+  return entry;
+}
+
+async function downloadSelectedArchetypes(btn, evt) {
+  evt.preventDefault();
+  var filtered = getSelectedData();
+  var contents = "var archetypesData = " + JSON.stringify(filtered, null, 2) + ";\n";
+  try {
+    var saved = await saveFileWithPicker("archetypes.js", contents, "text/javascript");
+    if (saved === false) saved = downloadViaAnchor("archetypes.js", contents, "text/javascript");
+    if (saved) flashButtonLabel(btn, "Saved");
+  } catch (err) {
+    console.error("Failed to save file: ", err);
+    flashButtonLabel(btn, "Failed");
+  }
+}
+
 function showAncestryList() {
-  archetypeData.ancestries.sort((a, b) => {
-    const nameCompare = a.name.localeCompare(b.name);
-    if (nameCompare !== 0) return nameCompare;
-    return (a.source || "").localeCompare(b.source || "");
+  var sorted = archetypeData.ancestries.slice().sort(function (a, b) {
+    var n = a.name.localeCompare(b.name);
+    return n !== 0 ? n : (a.source || "").localeCompare(b.source || "");
   });
 
-  archetypeData.ancestries.forEach((ancestry) => {
-    if (ancestry.archetypes) ancestry.archetypes.sort();
+  var list = document.getElementById("register-list");
+  list.replaceChildren();
+  sorted.forEach(function (ancestry) {
+    list.appendChild(buildRegisterEntry(ancestry));
   });
 
-  document.getElementById("ancestry-json").textContent = JSON.stringify(archetypeData, null, 2);
+  updateRegisterCount();
+  updateJsonPreview();
 
-  const locationTemplate = {
-    Random: archetypeData.ancestries.map((ancestry) => ({
-      name: ancestry.name,
-      source: ancestry.source,
-      roll: 1,
-      weight: 1,
-    })),
+  var locationTemplate = {
+    Random: archetypeData.ancestries.map(function (ancestry) {
+      return { name: ancestry.name, source: ancestry.source, roll: 1, weight: 1 };
+    }),
   };
-
   document.getElementById("location-json").textContent = JSON.stringify(locationTemplate, null, 2);
 
-  document.querySelectorAll("[data-download-kind]").forEach((btn) => {
-    const label = dataFileUsesJsModule(btn.dataset.downloadKind) ? "Download JS" : "Download JSON";
+  document.querySelectorAll("[data-download-kind]").forEach(function (btn) {
+    var label = dataFileUsesJsModule(btn.dataset.downloadKind) ? "Download JS" : "Download JSON";
     btn.textContent = label;
     btn.dataset.originalLabel = label;
   });
@@ -453,6 +607,23 @@ function bindUiHandlers() {
   document.querySelectorAll("[data-download]").forEach((btn) => {
     btn.addEventListener("click", (evt) => downloadDataFile(btn, evt));
   });
+
+  var showToggle = document.getElementById("show-deselected-toggle");
+  if (showToggle) {
+    showToggle.addEventListener("click", function () {
+      var isShowing = this.getAttribute("aria-pressed") === "true";
+      this.setAttribute("aria-pressed", isShowing ? "false" : "true");
+      this.textContent = isShowing ? "Show deselected" : "Hide deselected";
+      document.getElementById("register-list").classList.toggle("register-list--show-all", !isShowing);
+    });
+  }
+
+  var downloadBtn = document.getElementById("download-selected-btn");
+  if (downloadBtn) {
+    downloadBtn.addEventListener("click", function (evt) {
+      downloadSelectedArchetypes(this, evt);
+    });
+  }
 }
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -470,6 +641,7 @@ window.addEventListener("DOMContentLoaded", function () {
   var archErrors = validateArchetypes(archetypesData);
   if (archErrors.length) { reportDataErrors("archetypes.js", archErrors); return; }
   archetypeData = archetypesData;
+  initSelections();
 
   var firstLocation = Object.keys(locationData)[0];
   if (firstLocation) generateAncestry(firstLocation);

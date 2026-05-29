@@ -267,6 +267,208 @@ body {
   color: var(--ink-mid);
 }
 
+/* ── Ancestry selection register ─────────────── */
+
+.register-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0;
+}
+
+.register-count {
+  font-family: "Cinzel", serif;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.register-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.register-list {
+  max-height: 560px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+  margin-bottom: 48px;
+}
+
+.register-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.register-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.register-list::-webkit-scrollbar-thumb {
+  background: var(--rule);
+  border-radius: 2px;
+}
+
+/* Ancestry entry visibility */
+.register-entry[data-selected="false"] {
+  display: none;
+}
+
+.register-list--show-all .register-entry[data-selected="false"] {
+  display: block;
+}
+
+/* Archetype group: visible only when parent ancestry is selected */
+.register-entry[data-selected="false"] .register-archetypes {
+  display: none;
+}
+
+.register-entry[data-selected="true"] .register-archetypes {
+  display: block;
+}
+
+/* Individual archetype visibility */
+.register-archetype[data-selected="false"] {
+  display: none;
+}
+
+.register-list--show-all .register-entry[data-selected="true"] .register-archetype {
+  display: flex;
+}
+
+/* Ancestry row */
+.register-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid oklch(73% 0.024 69 / 0.45);
+}
+
+.register-entry[data-selected="false"] .register-row {
+  border-bottom-color: oklch(73% 0.024 69 / 0.25);
+}
+
+/* Archetype sub-rows */
+.register-archetypes {
+  padding-left: 20px;
+}
+
+.register-archetype {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px solid oklch(73% 0.024 69 / 0.2);
+}
+
+.register-archetype:last-child {
+  border-bottom: 1px solid oklch(73% 0.024 69 / 0.45);
+  padding-bottom: 9px;
+}
+
+/* Diamond buttons */
+.register-diamond-btn {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+}
+
+.register-diamond-btn::before {
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid var(--rule);
+  transform: rotate(45deg);
+  background: transparent;
+  transition:
+    background 0.15s ease-out,
+    border-color 0.15s ease-out,
+    transform 0.18s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.register-diamond-btn[aria-pressed="true"]::before {
+  background: var(--vermillion);
+  border-color: var(--vermillion);
+}
+
+.register-diamond-btn:hover::before {
+  border-color: var(--ink-mid);
+  background: oklch(58% 0.018 58 / 0.2);
+}
+
+.register-diamond-btn[aria-pressed="true"]:hover::before {
+  background: var(--vermillion-d);
+  border-color: var(--vermillion-d);
+}
+
+.register-diamond-btn:focus-visible {
+  outline: 2px solid var(--vermillion);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.register-diamond-btn--sub {
+  width: 16px;
+  height: 16px;
+}
+
+.register-diamond-btn--sub::before {
+  width: 7px;
+  height: 7px;
+}
+
+/* Text elements */
+.register-name {
+  font-family: "IM Fell DW Pica", Georgia, serif;
+  font-size: 17px;
+  color: var(--ink);
+  flex: 1;
+  line-height: 1.3;
+  transition: color 0.15s ease-out;
+}
+
+.register-entry[data-selected="false"] .register-name {
+  color: var(--ink-faint);
+}
+
+.register-name--sub {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--ink-mid);
+}
+
+.register-archetype[data-selected="false"] .register-name--sub {
+  color: oklch(58% 0.018 58 / 0.55);
+}
+
+.register-source {
+  font-family: "Cinzel", serif;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  flex-shrink: 0;
+  transition: opacity 0.15s ease-out;
+}
+
+.register-entry[data-selected="false"] .register-source {
+  opacity: 0.5;
+}
+
 /* ── JSON appendix ────────────────────────────── */
 
 #ancestry-list {
